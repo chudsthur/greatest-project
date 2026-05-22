@@ -41,3 +41,23 @@ Danach ist der nächste Spieler an der Reihe.
 ### Ende des Spiels
 Wer als erstes schafft alle seine Schweine in den Matsch zu schicken und nur noch Dreckschweine vor sich hat gewinnt das Spiel
 
+### IST DER NACHZIEHSTAPEL AUFGEBRAUCHT?
+Werden alle Karten im Ablagestapel wieder gemischt und neu gebraucht.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
