@@ -48,18 +48,7 @@ Werden alle Karten im Ablagestapel wieder gemischt und neu gebraucht.
 Die Drecksau-Runde kann mit vier Handkarten gespielt werden, was das Spiel dynamischer macht man kann schneller das eigene Schwein beschmutzen 
 oder ein gegnerisches wieder säubern.
 
-## Vor dem Spiel
-Jeder Spieler beginnt mit der Sauberseite seiner Schweinkarten. Die Anzahl der Schweine pro Spieler richtet sich nach der Gruppengröße: 
-bei 2 Spielern 5, bei 3 Spielern 4, bei 4 Spielern 3. Alle Spielkarten werden gemischt, jeder erhält 3 verdeckte Handkarten, der Rest 
-bildet den Nachziehstapel.
-
-## Ab in den Matsch!
-Das Spiel läuft im Uhrzeigersinn, die kleinste Drecksau beginnt. Pro Zug spielt man eine Handkarte auf zwei mögliche Arten aus:
-
-Anlegen ans eigene Schwein: Stall, Blitzableiter, Bauer-ärgere-dich
-Auf den Ablagestapel: Matsch, Regen, Blitz, Bauer-schrubbt-die-Sau – und die Kartenaktion ausführen
-
-Wer keine Karte nutzen möchte, kann sie ungenutzt ablegen. Danach zieht man stets eine neue Karte nach. Sind alle 3 Handkarten unspielbar, darf man sie den Mitspielern zeigen, alle ablegen und 3 neue ziehen.
+## Die Karten im Einzelnen
 
 
 
