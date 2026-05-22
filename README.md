@@ -38,7 +38,10 @@ Anschliessend zieht man eine neue Karte vom Nachziehstapel.
 Wenn der Spieler keine Karte ausspielen kann, muss er seine Karten den Mitspielern zeigen, die Karten auf den Ablagestapel legen und sie mit neuen Karten vom Nachziehstapel ersetzen.
 Danach ist der nächste Spieler an der Reihe.
 
-## IST DER NACHZIEHSTAPEL AUFGEBRAUCHT?
+### Ende des Spiels
+Wer als erstes schafft alle seine Schweine in den Matsch zu schicken und nur noch Dreckschweine vor sich hat gewinnt das Spiel
+
+### IST DER NACHZIEHSTAPEL AUFGEBRAUCHT?
 Werden alle Karten im Ablagestapel wieder gemischt und neu gebraucht.
 
 
