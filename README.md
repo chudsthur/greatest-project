@@ -37,3 +37,24 @@ Der Spieler kann entweder die Aktion der gespielten Karte ausführen, oder wenn 
 Anschliessend zieht man eine neue Karte vom Nachziehstapel.
 Wenn der Spieler keine Karte ausspielen kann, muss er seine Karten den Mitspielern zeigen, die Karten auf den Ablagestapel legen und sie mit neuen Karten vom Nachziehstapel ersetzen.
 Danach ist der nächste Spieler an der Reihe.
+
+## IST DER NACHZIEHSTAPEL AUFGEBRAUCHT?
+Werden alle Karten im Ablagestapel wieder gemischt und neu gebraucht.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
