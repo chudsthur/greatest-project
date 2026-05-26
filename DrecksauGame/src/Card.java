@@ -8,9 +8,9 @@ public class Card {
         Matschkarte, Regenkarte, Stallkarte, Blitzkarte,
         Blitzableiterkarte, Bauerschrubtkarte, Baueraergerkarte;
 
-        private static final Special[] karten = Special.values();
+        private static final Special[] specials = Special.values();
         public static Special getSpecial(int i) {
-            return Special.karten[i];
+            return Special.specials[i];
         }
     }
 
