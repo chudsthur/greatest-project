@@ -52,29 +52,29 @@ oder ein gegnerisches wieder säubern.
 
 ## Die Karten im Einzelnen
 
-- Die Matschkarte
+- **Die Matschkarte**  
   Wer die Matsch-Karte ausspielt, dreht eine seiner Sauberschwein-Karten um, sodass die Drecksau-Seite sichtbar ist – und ruft dabei laut „Drecksau!"
 
-- Die Regenkarte
+- **Die Regenkarte**  
   Wer die Regenkarte ausspielt, macht alle Drecksäue – auch die eigenen – wieder sauber. Ausnahme: Jede Drecksau mit Stall ist vor dem Regen geschützt.
 
-- Die Stallkarte
+- **Die Stallkarte**  
   Die Stallkarte wird an ein beliebiges eigenes Schwein angelegt und schützt es vor der Regenkarte. Gegen die Bauer-schrubbt-die-Sau-Karte bietet der Stall jedoch keinen Schutz.
 
-- Die Blitzkarte
+- **Die Blitzkarte**  
   Mit der Blitzkarte wird ein gegnerischer Stall zerstört – beide Karten kommen auf den Ablagestapel.
 
-- Die Blitzableiterkarte
+- **Die Blitzableiterkarte**  
   Ein Stall mit angelegtem Blitzableiter ist dauerhaft vor der Blitzkarte geschützt und kann im gesamten Spiel nicht mehr zerstört werden.
 
-- Die Bauer-schrubbt-die-Sau-Karte
+- **Die Bauer-schrubbt-die-Sau-Karte**  
   Mit der Bauer-schrubbt-die-Sau-Karte wird eine beliebige Drecksau eines Mitspielers wieder sauber gedreht – am besten begleitet vom Ausruf: „Ich putz dich!"
 
-- Die Bauer-ärgere-dich-Karte
+- **Die Bauer-ärgere-dich-Karte**  
   Wer einen Stall hat, kann die Bauer-ärgere-dich-Karte daran anlegen. Der so verriegelte Stall schützt alle darin befindlichen Schweine vor der Bauer-schrubbt-die-Sau-Karte.
 
- ## !! Achtung: Die Bauer-ärgere-dich-Karte kann nur an einen Stall angelegt werden, in dem bereits eine Drecksau steht.!!
- ## !!Achtung: Ein Blitz entfernt gleichzeitig sowohl den Stall als auch die Bauer-ärgere-dich-Karte eines Mitspielers!!
+ ### !! Achtung: Die Bauer-ärgere-dich-Karte kann nur an einen Stall angelegt werden, in dem bereits eine Drecksau steht.!!
+ ### !!Achtung: Ein Blitz entfernt gleichzeitig sowohl den Stall als auch die Bauer-ärgere-dich-Karte eines Mitspielers!!
 
  
 
