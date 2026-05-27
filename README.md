@@ -46,9 +46,6 @@ Wer als erstes schafft alle seine Schweine in den Matsch zu schicken und nur noc
 ## Ist der Nachstapel aufgebraucht?
 Werden alle Karten im Ablagestapel wieder gemischt und neu gebraucht.
 
-## Variante "Blitz-Drecksau"
-Die Drecksau-Runde kann mit vier Handkarten gespielt werden, was das Spiel dynamischer macht man kann schneller das eigene Schwein beschmutzen 
-oder ein gegnerisches wieder säubern.
 
 ## Die Karten im Einzelnen
 
