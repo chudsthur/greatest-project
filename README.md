@@ -41,7 +41,9 @@ Danach ist der nächste Spieler an der Reihe.
 ## Ende des Spiels
 Wer als erstes schafft alle seine Schweine in den Matsch zu schicken und nur noch Dreckschweine vor sich hat gewinnt das Spiel
 
-### *Eine Drecksau mit Stall, Blitzableiter und Bauer-ärgere-dich-Karte ist für den Rest des Spiels vollständig geschützt – die glücklichste Drecksau auf dem ganzen Hof!*
+
+### Eine Drecksau mit Stall, Blitzableiter und Bauer-ärgere-dich-Karte ist für den Rest des Spiels vollständig geschützt – die glücklichste Drecksau auf dem ganzen Hof!*
+
 
 ## Ist der Nachstapel aufgebraucht?
 Werden alle Karten im Ablagestapel wieder gemischt und neu gebraucht.
@@ -70,8 +72,8 @@ Werden alle Karten im Ablagestapel wieder gemischt und neu gebraucht.
 - **Die Bauer-ärgere-dich-Karte**  
   Wer einen Stall hat, kann die Bauer-ärgere-dich-Karte daran anlegen. Der so verriegelte Stall schützt alle darin befindlichen Schweine vor der Bauer-schrubbt-die-Sau-Karte.
 
- ### !! Achtung: Die Bauer-ärgere-dich-Karte kann nur an einen Stall angelegt werden, in dem bereits eine Drecksau steht.!!
- ### !!Achtung: Ein Blitz entfernt gleichzeitig sowohl den Stall als auch die Bauer-ärgere-dich-Karte eines Mitspielers!!
+ ### !! Achtung: Die Bauer-ärgere-dich-Karte kann nur an einen Stall angelegt werden, in dem bereits eine Drecksau steht !!
+ ### !! Achtung: Ein Blitz entfernt gleichzeitig sowohl den Stall als auch die Bauer-ärgere-dich-Karte eines Mitspielers !!
 
  
 
