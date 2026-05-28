@@ -67,10 +67,13 @@ Werden alle Karten im Ablagestapel wieder gemischt und neu gebraucht.
   Ein Stall mit angelegtem Blitzableiter ist dauerhaft vor der Blitzkarte geschützt und kann im gesamten Spiel nicht mehr zerstört werden.
 
 - **Die Bauer-schrubbt-die-Sau-Karte**  
-  Mit der Bauer-schrubbt-die-Sau-Karte wird eine beliebige Drecksau eines Mitspielers wieder sauber gedreht – am besten begleitet vom Ausruf: „Ich putz dich!"
+  Mit der Bauer-schrubbt-die-Sau-Karte wird eine beliebige Drecksau eines Mitspielers wieder sauber gedreht, am besten begleitet vom Ausruf: „Ich putz dich!"
 
 - **Die Bauer-ärgere-dich-Karte**  
   Wer einen Stall hat, kann die Bauer-ärgere-dich-Karte daran anlegen. Der so verriegelte Stall schützt alle darin befindlichen Schweine vor der Bauer-schrubbt-die-Sau-Karte.
+
+- **Die Schlammvulkankarte**
+  Alle Schweine die im Freien stehen, werden sofort dreckig gemacht. Dies zählt für die eigenen und gegnerischen Schweine! Diese Karte wurde von uns selber erfunden als Teil dieses Projekts.
 
  ### !! Achtung: Die Bauer-ärgere-dich-Karte kann nur an einen Stall angelegt werden, in dem bereits eine Drecksau steht !!
  ### !! Achtung: Ein Blitz entfernt gleichzeitig sowohl den Stall als auch die Bauer-ärgere-dich-Karte eines Mitspielers !!
