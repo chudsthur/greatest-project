@@ -1,81 +1,160 @@
+// Das hier ist der Ordnername in dem diese Datei liegt
 package Assets;
 
+// Hier holen wir alle Kartenklassen aus dem Kartenordner
 import Cards.*;
 
-
+// Hier laden wir eine Liste zum Speichern von Karten herunter
 import java.util.ArrayList;
+// Hier laden wir fertige Funktionen zum Mischen und Sortieren herunter
 import java.util.Collections;
+// Das ist die Vorlage für eine Liste in Java
 import java.util.List;
+// Hier holen wir einen Zufallsgenerator zum Mischen der Karten
 import java.util.Random;
 
+// Das ist die Klasse die das Kartendeck mit Nachzieh- und Ablagestapel darstellt
 public class Deck {
 
+    // Hier speichern wir die Karten die noch im Nachziehstapel liegen
     private final List<Card> drawPile;
+    
+    // Hier speichern wir die Karten die bereits auf dem Ablagestapel liegen
     private final List<Card> discardPile;
+    
+    // Hier speichern wir den Zufallsgenerator zum Mischen der Karten
     private final Random randomizer;
 
-    // Karten durchmischler
-    public void shuffle() {
-        Collections.shuffle(drawPile, randomizer);
+    // Das ist der Bauplan um ein neues Deck mit einem automatischen Zufallsgenerator zu erstellen
+    public Deck() {
+        // Wir rufen den detaillierten Bauplan mit einem neuen Zufallsgenerator auf
+        this(new Random());
     }
 
-    // Setzt randomizer
+    // Das ist der detaillierte Bauplan mit einem vorgegebenen Zufallsgenerator
     public Deck(Random randomizer) {
+        // Wir erstellen eine neue leere Liste für den Nachziehstapel
         this.drawPile = new ArrayList<>();
+        // Wir erstellen eine neue leere Liste für den Ablagestapel
         this.discardPile = new ArrayList<>();
+        // Wir speichern den Zufallsgenerator ab
         this.randomizer = randomizer;
     }
 
-    // Wenn Nachziehdeck leer ist, Ablagedeck durchmischeln und als neues Nachziehdeck benutzen
-    private void discard2draw() {
-        drawPile.addAll(discardPile);
-        discardPile.clear();
+    // Diese Funktion mischt den gesamten Nachziehstapel einmal kräftig durch
+    public void shuffle() {
+        // Wir nutzen das Werkzeug zum Mischen und übergeben unseren Zufallsgenerator
         Collections.shuffle(drawPile, randomizer);
     }
 
-    // Neue Karte ziehen
-    public Card draw() {
-        if(drawPile.isEmpty()) {
-            discard2draw();
-            throw new IllegalArgumentException("Deck ist leer, Ablagedeck wird neu durchmischelt...");
-        }
-        return drawPile.removeLast();
+    // Diese Funktion holt alle Karten vom Ablagestapel zurück wenn der Nachziehstapel leer ist
+    private void discard2draw() {
+        // Wir fügen alle Karten vom Ablagestapel wieder zum Nachziehstapel hinzu
+        drawPile.addAll(discardPile);
+        // Wir leeren den Ablagestapel komplett
+        discardPile.clear();
+        // Wir mischen den Nachziehstapel neu durch
+        shuffle();
     }
 
-    // Grösse des Nachziehstapels
+    // Diese Funktion zieht eine Karte oben vom Nachziehstapel ab
+    public Card draw() {
+        // Wenn keine Karten mehr zum Ziehen da sind
+        if (drawPile.isEmpty()) {
+            // Wir legen alle Karten vom Ablagestapel zurück und mischen neu
+            discard2draw();
+        }
+        
+        // Wenn selbst danach keine einzige Karte im Spiel ist
+        if (drawPile.isEmpty()) {
+            // Wir brechen mit einer Fehlermeldung ab da keine Karten mehr existieren
+            throw new IllegalStateException("Keine Karten mehr im Spiel vorhanden!");
+        }
+        
+        // Wir entfernen die oberste Karte vom Nachziehstapel und geben sie zurück
+        return drawPile.remove(drawPile.size() - 1);
+    }
+
+    // Diese Funktion sagt uns wie viele Karten noch auf dem Nachziehstapel liegen
     public int drawPileSize() {
+        // Wir geben die Größe der Nachziehstapel-Liste zurück
         return drawPile.size();
     }
-    // Grösse des Ablegestapels
+
+    // Diese Funktion sagt uns wie viele Karten bereits auf dem Ablagestapel liegen
     public int discardPileSize() {
+        // Wir geben die Größe der Ablagestapel-Liste zurück
         return discardPile.size();
     }
 
-    // Wenn man Karte aufnimmt, nimmt man Karte vom drawpile weg
+    // Diese Funktion fügt eine neue Karte zum Nachziehstapel hinzu
     public void add(Card card) {
-        drawPile.remove(card);
+        // Wir legen die Karte in die Liste des Nachziehstapels
+        drawPile.add(card);
     }
-    // Wenn man Karte hinlegt, wird diese dem discardpile hinzugefügt
+
+    // Diese Funktion legt eine bereits gespielte Karte auf den Ablagestapel
     public void discard(Card card) {
+        // Wir legen die Karte in die Liste des Ablagestapels
         discardPile.add(card);
     }
 
-    // Kreeirt das Kartendeck
+    // Diese Funktion erstellt ein spielbereites Standarddeck mit allen offiziellen Spielkarten
     public static Deck createStandardDeck(Random randomizer) {
+        // Wir erstellen ein neues leeres Deck mit dem Zufallsgenerator
         Deck deck = new Deck(randomizer);
 
-        // Fügt alle Karten zum Deck hinzu
-        for (int i = 0; i <= 21; i++) deck.add(new Matsch());
-        for (int i = 0; i <= 4; i++) deck.add(new Regen());
-        for (int i = 0; i <= 9; i++) deck.add(new Stall());
-        for (int i = 0; i <= 4; i++) deck.add(new Blitz());
-        for (int i = 0; i <= 4; i++) deck.add(new Blitzableiter());
-        for (int i = 0; i <= 8; i++) deck.add(new Bauerschrub());
-        for (int i = 0; i <= 4; i++) deck.add(new Baueraerger());
+        // Wir fügen genau einundzwanzig Matschkarten hinzu
+        for (int i = 0; i < 21; i++) {
+            // Wir erstellen eine neue Matschkarte und fügen sie hinzu
+            deck.add(new Matsch());
+        }
+        
+        // Wir fügen genau vier Regenkarten hinzu
+        for (int i = 0; i < 4; i++) {
+            // Wir erstellen eine neue Regenkarte und fügen sie hinzu
+            deck.add(new Regen());
+        }
+        
+        // Wir fügen genau neun Stallkarten hinzu
+        for (int i = 0; i < 9; i++) {
+            // Wir erstellen eine neue Stallkarte und fügen sie hinzu
+            deck.add(new Stall());
+        }
+        
+        // Wir fügen genau vier Blitzkarten hinzu
+        for (int i = 0; i < 4; i++) {
+            // Wir erstellen eine neue Blitzkarte und fügen sie hinzu
+            deck.add(new Blitz());
+        }
+        
+        // Wir fügen genau vier Blitzableiterkarten hinzu
+        for (int i = 0; i < 4; i++) {
+            // Wir erstellen eine neue Blitzableiterkarte und fügen sie hinzu
+            deck.add(new Blitzableiter());
+        }
+        
+        // Wir fügen genau acht Karten hinzu mit denen der Bauer ein Schwein sauber wäscht
+        for (int i = 0; i < 8; i++) {
+            // Wir erstellen eine neue Karte für das Waschen durch den Bauern und fügen sie hinzu
+            deck.add(new Bauerschrub());
+        }
+        
+        // Wir fügen genau vier Karten hinzu mit denen man die Stalltür verriegeln kann
+        for (int i = 0; i < 4; i++) {
+            // Wir erstellen eine neue Verriegelungskarte und fügen sie hinzu
+            deck.add(new Baueraerger());
+        }
 
-        // Nach hinzufügen der Karten, alle Karten randomizer durchmischen
+        // Wir fügen genau vier Schlammvulkankarten als kreative Zusatzkarten hinzu
+        for (int i = 0; i < 4; i++) {
+            // Wir erstellen eine neue Schlammvulkankarte und fügen sie hinzu
+            deck.add(new Schlammvulkan());
+        }
+
+        // Wir mischen das gefüllte Deck einmal kräftig durch
         deck.shuffle();
+        // Wir geben das spielbereite Deck zurück
         return deck;
     }
 }
-
