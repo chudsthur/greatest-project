@@ -65,32 +65,34 @@ public class GUIGame extends JFrame {
     private JLabel deckInfoLabel;
 
     // Hier definieren wir ein frisches Wiesengrün
-    private static final Color COLOR_GRASS = new Color(76, 154, 82);
+    private static final Color COLOR_GRASS = new Color(46, 125, 50);
     // Hier definieren wir ein warmes Schlammbraun
-    private static final Color COLOR_MUD = new Color(139, 90, 43);
+    private static final Color COLOR_MUD = new Color(121, 85, 72);
     // Hier definieren wir ein helles Holzbraun
-    private static final Color COLOR_WOOD = new Color(193, 154, 107);
+    private static final Color COLOR_WOOD = new Color(215, 169, 114);
     // Hier definieren wir ein dunkles Holzbraun
-    private static final Color COLOR_DARK_WOOD = new Color(101, 67, 33);
+    private static final Color COLOR_DARK_WOOD = new Color(93, 64, 55);
     // Hier definieren wir ein gemütliches Stallrot
-    private static final Color COLOR_STABLE_RED = new Color(192, 57, 43);
+    private static final Color COLOR_STABLE_RED = new Color(211, 47, 47);
     // Hier definieren wir ein niedliches Schweinerosa
-    private static final Color COLOR_PIG_PINK = new Color(255, 192, 203);
+    private static final Color COLOR_PIG_PINK = new Color(255, 182, 193);
     // Hier definieren wir ein dunkleres Rüsselrosa
-    private static final Color COLOR_PIG_DARK_PINK = new Color(244, 143, 177);
+    private static final Color COLOR_PIG_DARK_PINK = new Color(255, 105, 180);
     // Hier definieren wir ein glänzendes Goldgelb
-    private static final Color COLOR_GOLD = new Color(241, 196, 15);
+    private static final Color COLOR_GOLD = new Color(255, 215, 0);
+    // Hier definieren wir das edle Obsidian-Dunkelgrau für die Steuerungsleiste
+    private static final Color COLOR_OBSIDIAN = new Color(24, 28, 36);
 
     // Das ist der Bauplan für unser Spielfenster
     public GUIGame() {
         // Wir setzen den Fenstertitel fest
-        setTitle("DRECKSAU - Das Kartenspiel");
+        setTitle("DRECKSAU - Das schlammigste Kartenspiel");
         // Wir stellen ein dass das Programm komplett beendet wird wenn das Fenster geschlossen wird
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Wir legen die Standardgröße des Fensters fest
-        setSize(1100, 800);
+        setSize(1200, 850);
         // Wir legen die Mindestgröße des Fensters fest
-        setMinimumSize(new Dimension(1000, 750));
+        setMinimumSize(new Dimension(1100, 780));
         // Wir zentrieren das Fenster in der Mitte des Bildschirms
         setLocationRelativeTo(null);
 
@@ -122,7 +124,7 @@ public class GUIGame extends JFrame {
 
     // Diese Funktion baut die Eingabe-Ansicht für Spieleranzahl und Namen auf
     private void createSetupPanel() {
-        // Wir erstellen die Ansicht und bemalen den Hintergrund mit einem Farbverlauf
+        // Wir erstellen die Ansicht und bemalen den Hintergrund mit einem modernen dunklen Verlauf
         setupPanel = new JPanel(new GridBagLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -130,8 +132,10 @@ public class GUIGame extends JFrame {
                 super.paintComponent(g);
                 // Wir holen uns ein zweidimensionales Zeichenwerkzeug
                 Graphics2D g2d = (Graphics2D) g.create();
-                // Wir erstellen einen Farbverlauf von Dunkelgrün zu Schlammbraun
-                GradientPaint gp = new GradientPaint(0, 0, new Color(46, 125, 50), 0, getHeight(), new Color(141, 110, 99));
+                // Wir schalten die Kantenglättung für schöne Rundungen ein
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Wir erstellen einen eleganten dreifachen Farbverlauf von Tiefblau zu Dunkelgrün
+                GradientPaint gp = new GradientPaint(0, 0, new Color(18, 30, 49), 0, getHeight(), new Color(24, 52, 35));
                 // Wir laden den Farbverlauf in den Pinsel
                 g2d.setPaint(gp);
                 // Wir bemalen die gesamte Fläche mit dem Farbverlauf
@@ -144,18 +148,18 @@ public class GUIGame extends JFrame {
         // Wir erstellen ein Einstellungs-Werkzeug für das Anordnen der Texte und Eingaben
         GridBagConstraints gbc = new GridBagConstraints();
         // Wir legen Abstände um alle Elemente fest
-        gbc.insets = new Insets(15, 15, 15, 15);
+        gbc.insets = new Insets(10, 15, 10, 15);
         // Die Elemente sollen sich in der Breite anpassen
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Wir erstellen den großen Spieletitel
         JLabel titleLabel = new JLabel("DRECKSAU", JLabel.CENTER);
-        // Wir setzen eine große und fette Schriftart fest
-        titleLabel.setFont(new Font("Outfit", Font.BOLD, 72));
-        // Wir färben die Schrift weiß
-        titleLabel.setForeground(Color.WHITE);
+        // Wir setzen eine große und fette moderne Schriftart fest
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 84));
+        // Wir färben die Schrift goldgelb
+        titleLabel.setForeground(COLOR_GOLD);
         // Wir fügen einen leeren Abstand nach unten hinzu
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
         
         // Wir setzen die Position in der Tabelle fest
         gbc.gridx = 0;
@@ -165,52 +169,73 @@ public class GUIGame extends JFrame {
         // Wir fügen den Titel zur Ansicht hinzu
         setupPanel.add(titleLabel, gbc);
 
-        // Wir erstellen einen Untertitel
-        JLabel subtitleLabel = new JLabel("Das schlammigste Kartenspiel fuer 2-4 Spieler", JLabel.CENTER);
-        // Wir setzen eine kursive Schriftart fest
-        subtitleLabel.setFont(new Font("Inter", Font.ITALIC, 20));
+        // Wir erstellen einen eleganten Untertitel
+        JLabel subtitleLabel = new JLabel("Das schlammigste Kartenspiel aller Zeiten", JLabel.CENTER);
+        // Wir setzen eine moderne Schriftart fest
+        subtitleLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
         // Wir färben den Text hellgrün
-        subtitleLabel.setForeground(new Color(230, 240, 230));
+        subtitleLabel.setForeground(new Color(156, 204, 101));
         // Wir gehen in die nächste Zeile der Tabelle
         gbc.gridy = 1;
         // Wir fügen den Untertitel hinzu
         setupPanel.add(subtitleLabel, gbc);
 
-        // Wir erstellen eine Zeile für die Spieleranzahl
-        JPanel selectionRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        // Wir machen den Hintergrund dieser Zeile unsichtbar
-        selectionRow.setOpaque(false);
-        // Wir erstellen den beschreibenden Text
-        JLabel countLabel = new JLabel("Spieleranzahl: ");
-        // Wir setzen eine fette Schrift fest
-        countLabel.setFont(new Font("Inter", Font.BOLD, 18));
+        // Wir erstellen einen wunderschönen halbtransparenten Glaskasten für die Einstellungen
+        JPanel glassCard = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                // Wir rufen die Standard-Zeichenfunktion auf
+                super.paintComponent(g);
+                // Wir holen uns ein zweidimensionales Zeichenwerkzeug
+                Graphics2D g2d = (Graphics2D) g.create();
+                // Wir schalten die Kantenglättung ein
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Wir färben den Kasten mit einem halbtransparenten Weiß
+                g2d.setColor(new Color(255, 255, 255, 15));
+                // Wir zeichnen die Kiste mit abgerundeten Ecken
+                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 24, 24);
+                // Wir zeichnen einen hauchdünnen hellen Rand um die Kiste für den Glaseffekt
+                g2d.setColor(new Color(255, 255, 255, 30));
+                g2d.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 24, 24);
+                // Wir geben den Pinsel frei
+                g2d.dispose();
+            }
+        };
+        // Wir machen den Glaskasten im Hintergrund unsichtbar
+        glassCard.setOpaque(false);
+        // Wir legen einen Abstand innerhalb des Glaskastens fest
+        glassCard.setBorder(new EmptyBorder(25, 25, 25, 25));
+
+        // Wir erstellen ein Anordnungs-Werkzeug für den Glaskasten
+        GridBagConstraints cardGbc = new GridBagConstraints();
+        cardGbc.insets = new Insets(10, 10, 10, 10);
+        cardGbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Wir erstellen den beschreibenden Text für die Auswahl
+        JLabel countLabel = new JLabel("Waehle Spieleranzahl: ");
+        // Wir setzen eine moderne Schrift fest
+        countLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
         // Wir färben den Text weiß
         countLabel.setForeground(Color.WHITE);
-        // Wir fügen den Text zur Zeile hinzu
-        selectionRow.add(countLabel);
+        cardGbc.gridx = 0;
+        cardGbc.gridy = 0;
+        glassCard.add(countLabel, cardGbc);
 
-        // Wir legen die Auswahlmöglichkeiten für zwei, drei oder vier Spieler fest
+        // Wir legen die Auswahlmöglichkeiten fest
         Integer[] choices = { 2, 3, 4 };
         // Wir erstellen ein Auswahlmenü mit diesen Zahlen
         JComboBox<Integer> countCombo = new JComboBox<>(choices);
         // Wir setzen die Schriftart fest
-        countCombo.setFont(new Font("Inter", Font.PLAIN, 16));
+        countCombo.setFont(new Font("SansSerif", Font.PLAIN, 15));
         // Wir wählen standardmäßig drei Spieler aus
         countCombo.setSelectedItem(3);
-        // Wir fügen das Auswahlmenü zur Zeile hinzu
-        selectionRow.add(countCombo);
-        
-        // Wir gehen in die nächste Zeile der Tabelle
-        gbc.gridy = 2;
-        // Wir fügen die Auswahlzeile hinzu
-        setupPanel.add(selectionRow, gbc);
+        cardGbc.gridx = 1;
+        glassCard.add(countCombo, cardGbc);
 
         // Wir erstellen einen Kasten für die Namenseingabefelder
         JPanel namesPanel = new JPanel(new GridLayout(4, 2, 10, 10));
-        // Wir machen den Kasten unsichtbar so dass der Hintergrund durchscheint
+        // Wir machen den Kasten unsichtbar
         namesPanel.setOpaque(false);
-        // Wir legen die gewünschte Größe des Kastens fest
-        namesPanel.setPreferredSize(new Dimension(400, 160));
 
         // Wir erstellen Listen für die Beschriftungen und die Eingabefelder
         JLabel[] playerLabels = new JLabel[4];
@@ -219,18 +244,29 @@ public class GUIGame extends JFrame {
         // Wir erstellen nacheinander vier Eingabefelder
         for (int i = 0; i < 4; i++) {
             // Wir erstellen die Beschriftung für den jeweiligen Spieler
-            playerLabels[i] = new JLabel("Spieler " + (i + 1) + " Name:", JLabel.RIGHT);
+            playerLabels[i] = new JLabel("Name Spieler " + (i + 1) + ":", JLabel.RIGHT);
             // Wir setzen eine fette Schrift fest
-            playerLabels[i].setFont(new Font("Inter", Font.BOLD, 16));
+            playerLabels[i].setFont(new Font("SansSerif", Font.BOLD, 15));
             // Wir färben die Schrift weiß
             playerLabels[i].setForeground(Color.WHITE);
             
             // Wir erstellen das eigentliche Eingabefeld mit einem Standardnamen
             playerFields[i] = new JTextField("Spieler " + (i + 1));
             // Wir setzen die Schriftart fest
-            playerFields[i].setFont(new Font("Inter", Font.PLAIN, 16));
+            playerFields[i].setFont(new Font("SansSerif", Font.PLAIN, 15));
             // Wir legen die Standardgröße fest
-            playerFields[i].setPreferredSize(new Dimension(150, 30));
+            playerFields[i].setPreferredSize(new Dimension(150, 32));
+            // Wir setzen einen feinen Rahmen für das Eingabefeld
+            playerFields[i].setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(255, 255, 255, 40), 1),
+                BorderFactory.createEmptyBorder(4, 8, 4, 8)
+            ));
+            // Wir färben den Hintergrund des Eingabefelds dunkel
+            playerFields[i].setBackground(new Color(30, 35, 45));
+            // Wir färben den geschriebenen Text weiß
+            playerFields[i].setForeground(Color.WHITE);
+            // Wir färben den Cursor weiß
+            playerFields[i].setCaretColor(Color.WHITE);
 
             // Wir fügen die Beschriftung zum Kasten hinzu
             namesPanel.add(playerLabels[i]);
@@ -242,10 +278,11 @@ public class GUIGame extends JFrame {
         playerLabels[3].setVisible(false);
         playerFields[3].setVisible(false);
 
-        // Wir gehen in die nächste Zeile der Tabelle
-        gbc.gridy = 3;
-        // Wir fügen den gesamten Eingabekasten hinzu
-        setupPanel.add(namesPanel, gbc);
+        // Wir platzieren das Namenspanel in der nächsten Zeile des Glaskastens
+        cardGbc.gridx = 0;
+        cardGbc.gridy = 1;
+        cardGbc.gridwidth = 2;
+        glassCard.add(namesPanel, cardGbc);
 
         // Wir reagieren darauf wenn der Benutzer die Spieleranzahl im Menü ändert
         countCombo.addActionListener(e -> {
@@ -260,29 +297,45 @@ public class GUIGame extends JFrame {
                 // Wir stellen die Sichtbarkeit des Eingabefelds ein
                 playerFields[i].setVisible(show);
             }
-            // Wir berechnen die Anordnung der Ansicht neu
-            setupPanel.revalidate();
-            // Wir zeichnen die Ansicht neu
-            setupPanel.repaint();
+            // Wir berechnen die Anordnung neu
+            glassCard.revalidate();
+            // Wir zeichnen neu
+            glassCard.repaint();
         });
 
-        // Wir erstellen den Startknopf
+        // Wir fügen den gesamten Glaskasten zur Haupt-Ansicht hinzu
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        setupPanel.add(glassCard, gbc);
+
+        // Wir erstellen einen wunderschön abgerundeten Startknopf
         JButton startBtn = new JButton("Spiel starten!");
-        // Wir setzen eine große und fette Schrift fest
-        startBtn.setFont(new Font("Inter", Font.BOLD, 22));
-        // Wir färben den Knopf orange
-        startBtn.setBackground(new Color(255, 112, 67));
-        // Wir färben den Text weiß
-        startBtn.setForeground(Color.WHITE);
-        // Wir entfernen den unschönen Fokusrahmen um den Text
+        // Wir setzen eine große und fette moderne Schrift fest
+        startBtn.setFont(new Font("SansSerif", Font.BOLD, 22));
+        // Wir färben den Knopf goldgelb
+        startBtn.setBackground(COLOR_GOLD);
+        // Wir färben den Text dunkel
+        startBtn.setForeground(new Color(25, 28, 36));
+        // Wir entfernen den unschönen Fokusrahmen
         startBtn.setFocusPainted(false);
-        // Wir erstellen einen weißen Rahmen mit Abständen im Knopf
-        startBtn.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Color.WHITE, 2, true),
-            BorderFactory.createEmptyBorder(10, 30, 10, 30)
-        ));
+        // Wir erstellen einen Knopfrahmen mit runden Ecken und Abständen
+        startBtn.setBorder(BorderFactory.createEmptyBorder(12, 40, 12, 40));
         // Der Mauszeiger soll sich beim Drüberfahren in eine zeigende Hand verwandeln
         startBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Wir reagieren auf Maus-Schwebungen über dem Startknopf
+        startBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // Wir färben den Knopf beim Drüberfahren noch heller
+                startBtn.setBackground(new Color(255, 235, 59));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // Wir färben den Knopf wieder auf das normale Goldgelb zurück
+                startBtn.setBackground(COLOR_GOLD);
+            }
+        });
 
         // Wir reagieren auf einen Klick auf den Startknopf
         startBtn.addActionListener(e -> {
@@ -306,7 +359,10 @@ public class GUIGame extends JFrame {
             // Wir starten ein neues Spiel mit den eingelesenen Namen
             game = new Game(names);
             
-            // Wir leeren die Liste der Protokollnachrichten im Anzeigefeld
+            // Wir bauen zuerst die eigentliche Spieloberfläche komplett auf (damit das Datenmodell und logListModel initialisiert wird!)
+            createGamePanel();
+
+            // Jetzt können wir die Liste der Protokollnachrichten im Anzeigefeld leeren
             logListModel.clear();
             // Wir tragen alle bisherigen Startmeldungen in das Anzeigefeld ein
             for (String log : game.getActionLog()) {
@@ -314,8 +370,6 @@ public class GUIGame extends JFrame {
                 logListModel.addElement(log);
             }
 
-            // Wir bauen die eigentliche Spieloberfläche komplett auf
-            createGamePanel();
             // Wir fügen die Spieloberfläche zum Hauptcontainer hinzu
             mainContainer.add(gamePanel, "GAME");
             
@@ -324,9 +378,10 @@ public class GUIGame extends JFrame {
         });
 
         // Wir gehen in die nächste Zeile der Tabelle
-        gbc.gridy = 4;
-        // Der Knopf soll sich über beide Spalten erstrecken
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
+        // Wir fügen einen großen Abstand vor dem Knopf hinzu
+        gbc.insets = new Insets(25, 15, 10, 15);
         // Wir fügen den Startknopf hinzu
         setupPanel.add(startBtn, gbc);
     }
@@ -341,8 +396,8 @@ public class GUIGame extends JFrame {
                 super.paintComponent(g);
                 // Wir holen uns ein zweidimensionales Zeichenwerkzeug
                 Graphics2D g2d = (Graphics2D) g.create();
-                // Wir erstellen einen Verlauf von Dunkelgrau zu Schwarz
-                GradientPaint gp = new GradientPaint(0, 0, new Color(50, 50, 50), 0, getHeight(), new Color(20, 20, 20));
+                // Wir erstellen einen feinen modernen Verlauf
+                GradientPaint gp = new GradientPaint(0, 0, new Color(20, 24, 30), 0, getHeight(), new Color(10, 12, 15));
                 // Wir laden den Verlauf in den Pinsel
                 g2d.setPaint(gp);
                 // Wir bemalen die gesamte Fläche
@@ -358,45 +413,64 @@ public class GUIGame extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         // Wir legen große Abstände um alle Elemente fest
-        gbc.insets = new Insets(20, 20, 20, 20);
+        gbc.insets = new Insets(15, 20, 15, 20);
 
-        // Wir erstellen ein großes Auge-Zeichen als Sichtschutz
-        JLabel eyeLabel = new JLabel("Auge", JLabel.CENTER);
-        // Wir setzen eine sehr große Schriftart fest
-        eyeLabel.setFont(new Font("Inter", Font.BOLD, 120));
-        // Wir färben das Wort goldgelb
-        eyeLabel.setForeground(COLOR_GOLD);
-        // Wir fügen den Text hinzu
-        passPanel.add(eyeLabel, gbc);
+        // Wir erstellen einen großen Glaskasten für den Sichtschutz
+        JPanel glassCard = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                // Wir rufen die Standard-Zeichenfunktion auf
+                super.paintComponent(g);
+                // Wir holen uns ein zweidimensionales Zeichenwerkzeug
+                Graphics2D g2d = (Graphics2D) g.create();
+                // Wir schalten die Kantenglättung ein
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Wir bemalen die Kiste halbtransparent
+                g2d.setColor(new Color(255, 255, 255, 10));
+                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 24, 24);
+                // Feiner weißer Rahmen
+                g2d.setColor(new Color(255, 255, 255, 20));
+                g2d.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 24, 24);
+                g2d.dispose();
+            }
+        };
+        // Wir machen den Glaskasten unsichtbar
+        glassCard.setOpaque(false);
+        // Wir legen einen Abstand innerhalb des Kastens fest
+        glassCard.setBorder(new EmptyBorder(30, 40, 30, 40));
+
+        // Wir erstellen das Anordnungs-Werkzeug für das Glaspanel
+        GridBagConstraints cardGbc = new GridBagConstraints();
+        cardGbc.insets = new Insets(15, 10, 15, 10);
+        cardGbc.gridx = 0;
 
         // Wir erstellen die Überschrift für den Spielerwechsel
         JLabel passTitle = new JLabel("SPIELERWECHSEL", JLabel.CENTER);
-        // Wir setzen eine fette Schrift fest
-        passTitle.setFont(new Font("Outfit", Font.BOLD, 48));
+        // Wir setzen eine fette moderne Schrift fest
+        passTitle.setFont(new Font("SansSerif", Font.BOLD, 36));
         // Wir färben den Text weiß
         passTitle.setForeground(Color.WHITE);
-        // Wir gehen in die nächste Zeile der Tabelle
-        gbc.gridy = 1;
+        cardGbc.gridy = 0;
         // Wir fügen die Überschrift hinzu
-        passPanel.add(passTitle, gbc);
+        glassCard.add(passTitle, cardGbc);
 
         // Wir erstellen den Hinweistext wer sich bereit machen soll
         JLabel nextPlayerText = new JLabel("Bereit machen, ...", JLabel.CENTER);
         // Wir setzen die Schriftart fest
-        nextPlayerText.setFont(new Font("Inter", Font.PLAIN, 24));
-        // Wir färben den Text hellgrau
-        nextPlayerText.setForeground(new Color(200, 200, 200));
+        nextPlayerText.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        // Wir färben den Text hellgrün
+        nextPlayerText.setForeground(new Color(139, 195, 74));
         // Wir gehen in die nächste Zeile
-        gbc.gridy = 2;
+        cardGbc.gridy = 1;
         // Wir fügen den Text hinzu
-        passPanel.add(nextPlayerText, gbc);
+        glassCard.add(nextPlayerText, cardGbc);
 
         // Wir erstellen den Knopf zum Aufdecken der Karten
         JButton showHandBtn = new JButton("Handkarten aufdecken");
         // Wir setzen die Schriftart fest
-        showHandBtn.setFont(new Font("Inter", Font.BOLD, 20));
+        showHandBtn.setFont(new Font("SansSerif", Font.BOLD, 18));
         // Wir färben den Knopf blau
-        showHandBtn.setBackground(new Color(41, 128, 185));
+        showHandBtn.setBackground(new Color(33, 150, 243));
         // Wir färben die Schrift weiß
         showHandBtn.setForeground(Color.WHITE);
         // Wir entfernen den unschönen Fokusrahmen
@@ -404,7 +478,21 @@ public class GUIGame extends JFrame {
         // Der Mauszeiger soll sich in eine Hand verwandeln
         showHandBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         // Wir fügen Abstände im Knopf hinzu
-        showHandBtn.setBorder(BorderFactory.createEmptyBorder(15, 40, 15, 40));
+        showHandBtn.setBorder(BorderFactory.createEmptyBorder(12, 35, 12, 35));
+
+        // Wir reagieren auf Mausberührungen über dem Knopf
+        showHandBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // Heller machen
+                showHandBtn.setBackground(new Color(66, 165, 245));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // Zurücksetzen
+                showHandBtn.setBackground(new Color(33, 150, 243));
+            }
+        });
 
         // Wir reagieren auf den Klick um den Sichtschutz zu beenden
         showHandBtn.addActionListener(e -> {
@@ -413,10 +501,12 @@ public class GUIGame extends JFrame {
             // Wir bringen alle Anzeigen auf den allerneuesten Stand
             updateUIState();
         });
-        // Wir gehen in die nächste Zeile
-        gbc.gridy = 3;
+        cardGbc.gridy = 2;
         // Wir fügen den Knopf hinzu
-        passPanel.add(showHandBtn, gbc);
+        glassCard.add(showHandBtn, cardGbc);
+
+        // Wir fügen den Glaskasten zur Sichtschutz-Ansicht hinzu
+        passPanel.add(glassCard, gbc);
     }
 
     // Diese Funktion baut den Siegesbildschirm auf
@@ -429,8 +519,8 @@ public class GUIGame extends JFrame {
                 super.paintComponent(g);
                 // Wir holen uns ein zweidimensionales Zeichenwerkzeug
                 Graphics2D g2d = (Graphics2D) g.create();
-                // Wir erstellen einen festlichen Farbverlauf von Orange zu Pink
-                GradientPaint gp = new GradientPaint(0, 0, new Color(251, 140, 0), 0, getHeight(), new Color(216, 27, 96));
+                // Wir erstellen einen festlichen Farbverlauf von Dunkelgold zu Dunkelrot
+                GradientPaint gp = new GradientPaint(0, 0, new Color(245, 124, 0), 0, getHeight(), new Color(136, 14, 79));
                 // Wir laden den Verlauf
                 g2d.setPaint(gp);
                 // Wir bemalen die gesamte Fläche
@@ -439,15 +529,15 @@ public class GUIGame extends JFrame {
                 // Wir schalten die Kantenglättung für schöne Formen ein
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 // Wir wählen ein leicht transparentes Weiß
-                g2d.setColor(new Color(255, 255, 255, 40));
-                // Wir zeichnen fünfzehn zufällig verteilte Konfetti-Punkte im Hintergrund
-                for (int i = 0; i < 15; i++) {
+                g2d.setColor(new Color(255, 255, 255, 30));
+                // Wir zeichnen fünfzehn zufällig verteilte Punkte im Hintergrund
+                for (int i = 0; i < 20; i++) {
                     // Wir würfeln eine zufällige Position in der Breite
                     int x = (int) (Math.random() * getWidth());
                     // Wir würfeln eine zufällige Position in der Höhe
                     int y = (int) (Math.random() * getHeight());
-                    // Wir würfeln eine zufällige Größe für den Konfetti-Punkt
-                    int size = 20 + (int) (Math.random() * 50);
+                    // Wir würfeln eine zufällige Größe
+                    int size = 15 + (int) (Math.random() * 40);
                     // Wir zeichnen den Punkt auf den Hintergrund
                     g2d.fillOval(x, y, size, size);
                 }
@@ -462,56 +552,72 @@ public class GUIGame extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         // Wir legen Abstände um alle Elemente fest
-        gbc.insets = new Insets(15, 15, 15, 15);
+        gbc.insets = new Insets(10, 15, 10, 15);
 
-        // Wir erstellen eine Textbeschriftung für den Pokal
-        JLabel crownLabel = new JLabel("POKAL", JLabel.CENTER);
-        // Wir setzen eine riesige Schriftart fest
-        crownLabel.setFont(new Font("Inter", Font.BOLD, 100));
-        // Wir färben die Schrift weiß
-        crownLabel.setForeground(Color.WHITE);
-        // Wir fügen den Pokal hinzu
-        victoryPanel.add(crownLabel, gbc);
+        // Wir erstellen einen großen Glaskasten für den Sieg
+        JPanel glassCard = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                // Wir rufen die Standard-Zeichenfunktion auf
+                super.paintComponent(g);
+                // Wir holen uns ein zweidimensionales Zeichenwerkzeug
+                Graphics2D g2d = (Graphics2D) g.create();
+                // Wir schalten die Kantenglättung ein
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Wir bemalen die Kiste halbtransparent
+                g2d.setColor(new Color(255, 255, 255, 15));
+                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 24, 24);
+                // Feiner Rahmen
+                g2d.setColor(new Color(255, 255, 255, 25));
+                g2d.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 24, 24);
+                g2d.dispose();
+            }
+        };
+        // Wir machen den Glaskasten unsichtbar
+        glassCard.setOpaque(false);
+        // Wir legen einen Abstand innerhalb des Kastens fest
+        glassCard.setBorder(new EmptyBorder(35, 45, 35, 45));
+
+        // Wir erstellen das Anordnungs-Werkzeug für das Glaspanel
+        GridBagConstraints cardGbc = new GridBagConstraints();
+        cardGbc.insets = new Insets(12, 10, 12, 10);
+        cardGbc.gridx = 0;
 
         // Wir erstellen den großen Sieges-Titel
         JLabel winTitle = new JLabel("HERZLICHEN GLUECKWUNSCH!", JLabel.CENTER);
         // Wir setzen eine sehr große und fette Schrift fest
-        winTitle.setFont(new Font("Outfit", Font.BOLD, 52));
+        winTitle.setFont(new Font("SansSerif", Font.BOLD, 42));
         // Wir färben die Schrift weiß
         winTitle.setForeground(Color.WHITE);
-        // Wir gehen in die nächste Zeile
-        gbc.gridy = 1;
-        // Wir fügen die Überschrift hinzu
-        victoryPanel.add(winTitle, gbc);
+        cardGbc.gridy = 0;
+        glassCard.add(winTitle, cardGbc);
 
         // Wir erstellen den Gewinner-Text
         JLabel winnerText = new JLabel("Spieler hat gewonnen!", JLabel.CENTER);
         // Wir setzen eine fette Schrift fest
-        winnerText.setFont(new Font("Inter", Font.BOLD, 32));
+        winnerText.setFont(new Font("SansSerif", Font.BOLD, 30));
         // Wir färben den Text goldgelb
         winnerText.setForeground(COLOR_GOLD);
         // Wir gehen in die nächste Zeile
-        gbc.gridy = 2;
-        // Wir fügen den Text hinzu
-        victoryPanel.add(winnerText, gbc);
+        cardGbc.gridy = 1;
+        glassCard.add(winnerText, cardGbc);
 
         // Wir erstellen eine kurze Erklärung
         JLabel descText = new JLabel("Alle Schweine sind glueckliche Drecksaeue geworden!", JLabel.CENTER);
         // Wir setzen die Schriftart fest
-        descText.setFont(new Font("Inter", Font.PLAIN, 20));
+        descText.setFont(new Font("SansSerif", Font.PLAIN, 18));
         // Wir färben den Text weiß
         descText.setForeground(Color.WHITE);
         // Wir gehen in die nächste Zeile
-        gbc.gridy = 3;
-        // Wir fügen die Erklärung hinzu
-        victoryPanel.add(descText, gbc);
+        cardGbc.gridy = 2;
+        glassCard.add(descText, cardGbc);
 
         // Wir erstellen den Knopf um ein neues Spiel zu starten
         JButton restartBtn = new JButton("Neues Spiel starten");
         // Wir setzen eine fette Schrift fest
-        restartBtn.setFont(new Font("Inter", Font.BOLD, 20));
+        restartBtn.setFont(new Font("SansSerif", Font.BOLD, 18));
         // Wir färben den Knopf dunkelgrün
-        restartBtn.setBackground(new Color(46, 125, 50));
+        restartBtn.setBackground(new Color(76, 175, 80));
         // Wir färben die Schrift weiß
         restartBtn.setForeground(Color.WHITE);
         // Wir entfernen den Fokusrahmen
@@ -519,17 +625,32 @@ public class GUIGame extends JFrame {
         // Der Mauszeiger soll sich in eine zeigende Hand verwandeln
         restartBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         // Wir fügen Abstände im Knopf hinzu
-        restartBtn.setBorder(BorderFactory.createEmptyBorder(15, 45, 15, 45));
+        restartBtn.setBorder(BorderFactory.createEmptyBorder(12, 40, 12, 40));
+
+        // Wir reagieren auf Mausberührungen über dem Knopf
+        restartBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // Heller machen
+                restartBtn.setBackground(new Color(102, 187, 106));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // Zurücksetzen
+                restartBtn.setBackground(new Color(76, 175, 80));
+            }
+        });
 
         // Wir reagieren auf einen Klick auf den Neustartknopf
         restartBtn.addActionListener(e -> {
             // Wir wechseln die Ansicht zurück auf die Spielereingabe
             cardLayout.show(mainContainer, "SETUP");
         });
-        // Wir gehen in die nächste Zeile
-        gbc.gridy = 4;
-        // Wir fügen den Knopf hinzu
-        victoryPanel.add(restartBtn, gbc);
+        cardGbc.gridy = 3;
+        glassCard.add(restartBtn, cardGbc);
+
+        // Wir fügen den Glaskasten zur Sieges-Ansicht hinzu
+        victoryPanel.add(glassCard, gbc);
     }
 
     // Diese Funktion baut die eigentliche Spielfeld-Ansicht auf
@@ -549,29 +670,29 @@ public class GUIGame extends JFrame {
                 Graphics2D g2d = (Graphics2D) g.create();
                 // Wir schalten die Kantenglättung für schöne Rundungen ein
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                // Wir erstellen einen Farbverlauf für frischen Rasen
-                GradientPaint gp = new GradientPaint(0, 0, new Color(56, 124, 62), 0, getHeight(), new Color(86, 164, 92));
+                // Wir erstellen einen wunderschönen strukturierten Farbverlauf für die Weide
+                GradientPaint gp = new GradientPaint(0, 0, new Color(34, 112, 40), 0, getHeight(), new Color(46, 139, 53));
                 // Wir laden den Verlauf
                 g2d.setPaint(gp);
-                // Wir bemalen die gesamte Wiese mit dem Grünverlauf
+                // Wir bemalen die gesamte Wiese
                 g2d.fillRect(0, 0, getWidth(), getHeight());
                 // Wir geben den Pinsel wieder frei
                 g2d.dispose();
             }
         };
-        // Wir nutzen eine Tabelle für die Wiese um Gegner und eigenen Spieler perfekt zu teilen
+        // Wir nutzen eine Tabelle für die Wiese
         pasturePanel.setLayout(new GridBagLayout());
         // Wir fügen die Wiese in die Mitte des Spielfelds ein
         gamePanel.add(pasturePanel, BorderLayout.CENTER);
 
-        // Wir erstellen die Holz-Steuerungsleiste auf der rechten Seite
+        // Wir erstellen die Steuerungsleiste im Obsidian-Stil auf der rechten Seite
         createControlPanel();
         // Wir fügen die Leiste rechts an das Spielfeld an
         gamePanel.add(controlPanel, BorderLayout.EAST);
 
         // Wir erstellen einen Bereich ganz unten für die eigenen Karten
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        // Wir machen den Hintergrund unsichtbar damit die Wiese durchscheint
+        // Wir machen den Hintergrund unsichtbar
         bottomPanel.setOpaque(false);
         // Wir legen Abstände um das Kartenpanel fest
         bottomPanel.setBorder(new EmptyBorder(10, 20, 20, 20));
@@ -590,9 +711,9 @@ public class GUIGame extends JFrame {
         updateUIState();
     }
 
-    // Diese Funktion baut die hölzerne Steuerungsleiste rechts auf
+    // Diese Funktion baut die Obsidian-Steuerungsleiste rechts auf
     private void createControlPanel() {
-        // Wir bemalen die Leiste mit einer edlen Holztextur
+        // Wir bemalen die Leiste mit einem extrem edlen Dark-Mode / Obsidian Design
         controlPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -602,19 +723,15 @@ public class GUIGame extends JFrame {
                 Graphics2D g2d = (Graphics2D) g.create();
                 // Wir schalten die Kantenglättung ein
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                // Wir erstellen einen Holzverlauf von Hellbraun zu Dunkelbraun
-                GradientPaint gp = new GradientPaint(0, 0, new Color(139, 90, 43), getWidth(), 0, new Color(101, 67, 33));
-                // Wir laden den Holzverlauf
-                g2d.setPaint(gp);
-                // Wir bemalen die gesamte Fläche mit dem Holzdesign
+                // Wir bemalen die gesamte Steuerungsleiste im edlen Obsidian-Dunkelgrau
+                g2d.setColor(COLOR_OBSIDIAN);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
                 
-                // Wir zeichnen eine feine weiße Begrenzungslinie zur Zierde
-                g2d.setColor(new Color(255, 255, 255, 50));
-                // Wir wählen eine feine Linienstärke von 1,5 Punkten
-                g2d.setStroke(new BasicStroke(1.5f));
-                // Wir zeichnen die Rahmenlinie im Kasten
-                g2d.drawRect(5, 5, getWidth() - 10, getHeight() - 10);
+                // Wir zeichnen eine feine, neon-blaue vertikale Zierlinie an der linken Seite
+                g2d.setColor(new Color(33, 150, 243, 150));
+                g2d.setStroke(new BasicStroke(2.0f));
+                g2d.drawLine(0, 0, 0, getHeight());
+                
                 // Wir geben den Pinsel frei
                 g2d.dispose();
             }
@@ -624,14 +741,14 @@ public class GUIGame extends JFrame {
         // Wir legen die Breite der Leiste auf 320 Bildpunkte fest
         controlPanel.setPreferredSize(new Dimension(320, 0));
         // Wir legen einen inneren Abstand um die Elemente fest
-        controlPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        controlPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         // Wir erstellen die Überschrift für die Steuerungsleiste
         JLabel labelSpielfeld = new JLabel("SCHEUER UND STAPEL", JLabel.CENTER);
-        // Wir setzen eine fette Schrift fest
-        labelSpielfeld.setFont(new Font("Outfit", Font.BOLD, 22));
-        // Wir färben den Text weiß
-        labelSpielfeld.setForeground(Color.WHITE);
+        // Wir setzen eine fette moderne Schrift fest
+        labelSpielfeld.setFont(new Font("SansSerif", Font.BOLD, 18));
+        // Wir färben den Text beige/weiß
+        labelSpielfeld.setForeground(new Color(236, 240, 241));
         // Wir zentrieren die Überschrift mittig in der Leiste
         labelSpielfeld.setAlignmentX(Component.CENTER_ALIGNMENT);
         // Wir fügen die Überschrift hinzu
@@ -642,17 +759,17 @@ public class GUIGame extends JFrame {
         // Wir erstellen das Textfeld für Informationen zum Stapel
         deckInfoLabel = new JLabel("Karten im Deck: --", JLabel.CENTER);
         // Wir setzen eine fette Schrift fest
-        deckInfoLabel.setFont(new Font("Inter", Font.BOLD, 15));
-        // Wir färben den Text beige
-        deckInfoLabel.setForeground(new Color(245, 242, 235));
+        deckInfoLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        // Wir färben den Text hellgrau/blau
+        deckInfoLabel.setForeground(new Color(144, 164, 174));
         // Wir zentrieren den Text mittig
         deckInfoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         // Wir fügen das Textfeld hinzu
         controlPanel.add(deckInfoLabel);
         // Wir fügen einen leeren Abstand ein
-        controlPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 
-        // Wir erstellen den Ablagestapel als visuelle Kiste
+        // Wir erstellen den Ablagestapel als visuelle Kiste mit Glaseffekt
         JPanel pilePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -664,27 +781,27 @@ public class GUIGame extends JFrame {
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 
                 // Wir zeichnen eine leicht transparente weiße Kiste
-                g2d.setColor(new Color(255, 255, 255, 30));
-                // Wir bemalen die Kiste mit abgerundeten Ecken
-                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
+                g2d.setColor(new Color(255, 255, 255, 12));
+                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 16, 16);
+                
+                // Feiner weißer Rand
+                g2d.setColor(new Color(255, 255, 255, 25));
+                g2d.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 16, 16);
                 
                 // Wir wählen eine weiße Schriftfarbe
                 g2d.setColor(Color.WHITE);
                 // Wir setzen eine fette Schrift fest
-                g2d.setFont(new Font("Inter", Font.BOLD, 14));
+                g2d.setFont(new Font("SansSerif", Font.BOLD, 13));
                 // Wir erstellen einen Standardtext für einen leeren Ablagestapel
                 String text = "Ablagestapel leer";
                 // Wenn das Spiel läuft und Karten auf dem Stapel liegen
                 if (game != null && game.getDeck().discardPileSize() > 0) {
-                    // Wir ändern den Text
                     text = "Oben auf Ablagestapel";
                 }
-                // Wir holen uns ein Messwerkzeug für Schriftzeichen
                 FontMetrics fm = g2d.getFontMetrics();
                 // Wir zeichnen den Text genau zentriert in die Kiste
                 g2d.drawString(text, (getWidth() - fm.stringWidth(text)) / 2, 25);
                 
-                // Wir geben das Zeichenwerkzeug frei
                 g2d.dispose();
             }
         };
@@ -700,16 +817,16 @@ public class GUIGame extends JFrame {
         // Wir erstellen den Knopf um Karten abzulegen oder global zu spielen
         playGlobalButton = new JButton("Karte hier spielen / abwerfen");
         // Wir setzen die Schriftart fest
-        playGlobalButton.setFont(new Font("Inter", Font.BOLD, 13));
-        // Wir färben den Knopf blau
-        playGlobalButton.setBackground(new Color(41, 128, 185));
+        playGlobalButton.setFont(new Font("SansSerif", Font.BOLD, 12));
+        // Wir färben den Knopf modern blau
+        playGlobalButton.setBackground(new Color(33, 150, 243));
         // Wir färben die Schrift weiß
         playGlobalButton.setForeground(Color.WHITE);
         // Wir entfernen den Fokusrahmen
         playGlobalButton.setFocusPainted(false);
         // Der Knopf soll zu Beginn unsichtbar sein da noch keine Karte ausgewählt ist
         playGlobalButton.setVisible(false);
-        // Wir reagieren auf einen Klick auf diesen Knopf
+        // Wir reagieren auf einen Klick
         playGlobalButton.addActionListener(e -> handleDiscardOrGlobalPlay());
         // Wir fügen den Knopf in die Kiste des Ablagestapels ein
         pilePanel.add(playGlobalButton);
@@ -722,50 +839,49 @@ public class GUIGame extends JFrame {
         // Wir erstellen eine Überschrift für die Spielnachrichten
         JLabel logTitle = new JLabel("Hof-Nachrichten", JLabel.LEFT);
         // Wir setzen eine fette Schrift fest
-        logTitle.setFont(new Font("Outfit", Font.BOLD, 16));
-        // Wir färben den Text beige
-        logTitle.setForeground(new Color(245, 242, 235));
+        logTitle.setFont(new Font("SansSerif", Font.BOLD, 15));
+        // Wir färben den Text beige/weiß
+        logTitle.setForeground(new Color(236, 240, 241));
         // Wir zentrieren die Überschrift
         logTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         // Wir fügen die Überschrift hinzu
         controlPanel.add(logTitle);
         // Wir fügen einen kleinen Abstand ein
-        controlPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 8)));
 
         // Wir erstellen eine neue Liste für die Spielnachrichten
         logListModel = new DefaultListModel<>();
         // Wir erstellen das Anzeigefeld und verknüpfen es mit der Liste
         logList = new JList<>(logListModel);
-        // Wir setzen eine gut lesbare Schriftart mit fester Breite fest
-        logList.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        // Wir färben den Hintergrund dunkelbraun
-        logList.setBackground(new Color(44, 34, 24));
-        // Wir färben den Text beige
-        logList.setForeground(new Color(230, 220, 200));
-        // Wir färben die Hintergrundfarbe für ausgewählte Zeilen dunkelbraun
-        logList.setSelectionBackground(new Color(44, 34, 24));
-        // Wir färben die Schriftfarbe für ausgewählte Zeilen beige
-        logList.setSelectionForeground(new Color(230, 220, 200));
+        // Wir setzen eine moderne serifenlose Schriftart fest
+        logList.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        // Wir färben den Hintergrund dunkelgrau
+        logList.setBackground(new Color(33, 38, 48));
+        // Wir färben den Text hellgrau/beige
+        logList.setForeground(new Color(207, 216, 220));
+        // Wir färben die Hintergrundfarbe für ausgewählte Zeilen
+        logList.setSelectionBackground(new Color(33, 38, 48));
+        logList.setSelectionForeground(new Color(207, 216, 220));
         
-        // Wir erstellen eine Scrollbox falls es sehr viele Nachrichten gibt
+        // Wir erstellen eine Scrollbox
         JScrollPane logScroll = new JScrollPane(logList);
         // Wir zeichnen eine feine dunkle Umrandung um die Scrollbox
-        logScroll.setBorder(BorderFactory.createLineBorder(new Color(0,0,0,80), 2));
+        logScroll.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 15), 1));
         // Wir begrenzen die Größe der Scrollbox
-        logScroll.setMaximumSize(new Dimension(280, 220));
+        logScroll.setMaximumSize(new Dimension(280, 250));
         // Wir legen die Standardgröße fest
-        logScroll.setPreferredSize(new Dimension(280, 220));
+        logScroll.setPreferredSize(new Dimension(280, 250));
         // Wir fügen die Scrollbox zur Steuerungsleiste hinzu
         controlPanel.add(logScroll);
         // Wir fügen einen leeren Abstand hinzu
         controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Wir erstellen den Notfallknopf zum Abwerfen der gesamten Hand
-        discardEntireHandButton = new JButton("Hand abwerfen und neu ziehen");
+        discardEntireHandButton = new JButton("Hand abwerfen & neu ziehen");
         // Wir setzen die Schriftart fest
-        discardEntireHandButton.setFont(new Font("Inter", Font.BOLD, 14));
+        discardEntireHandButton.setFont(new Font("SansSerif", Font.BOLD, 13));
         // Wir färben den Knopf dunkelrot
-        discardEntireHandButton.setBackground(new Color(192, 57, 43));
+        discardEntireHandButton.setBackground(new Color(183, 28, 28));
         // Wir färben den Text weiß
         discardEntireHandButton.setForeground(Color.WHITE);
         // Wir entfernen den Fokusrahmen
@@ -776,9 +892,9 @@ public class GUIGame extends JFrame {
         discardEntireHandButton.setMaximumSize(new Dimension(280, 45));
         // Der Mauszeiger soll sich in eine Hand verwandeln
         discardEntireHandButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // Der Knopf ist zu Beginn gesperrt und wird erst aktiv wenn keine Züge mehr möglich sind
+        // Der Knopf ist zu Beginn gesperrt
         discardEntireHandButton.setEnabled(false);
-        // Wir reagieren auf einen Klick auf diesen Knopf
+        // Wir reagieren auf einen Klick
         discardEntireHandButton.addActionListener(e -> handleDiscardEntireHand());
         // Wir fügen den Knopf zur Steuerungsleiste hinzu
         controlPanel.add(discardEntireHandButton);
@@ -801,11 +917,11 @@ public class GUIGame extends JFrame {
         // Wenn der Spieler blockiert ist
         if (!hasMoves) {
             // Wir färben den Knopf leuchtend rot als Warnung
-            discardEntireHandButton.setBackground(new Color(231, 76, 60));
+            discardEntireHandButton.setBackground(new Color(229, 57, 53));
         // Wenn der Spieler noch normal legen kann
         } else {
             // Wir färben den Knopf dezent dunkelrot
-            discardEntireHandButton.setBackground(new Color(120, 40, 30));
+            discardEntireHandButton.setBackground(new Color(110, 20, 20));
         }
 
         // Wenn der Spieler eine Karte auf der Hand angeklickt hat
@@ -817,13 +933,13 @@ public class GUIGame extends JFrame {
                 // Wir ändern den Text auf globales Ausspielen
                 playGlobalButton.setText("Global ausspielen!");
                 // Wir färben den Knopf wiesengrün
-                playGlobalButton.setBackground(new Color(39, 174, 96));
+                playGlobalButton.setBackground(new Color(76, 175, 80));
             // Bei allen anderen Karten handelt es sich um ein normales Abwerfen
             } else {
                 // Wir ändern den Text auf ungenutzt abwerfen
                 playGlobalButton.setText("Ungenutzt abwerfen");
                 // Wir färben den Knopf grau
-                playGlobalButton.setBackground(new Color(127, 140, 141));
+                playGlobalButton.setBackground(new Color(96, 125, 139));
             }
         // Wenn keine Karte angeklickt ist
         } else {
@@ -838,7 +954,7 @@ public class GUIGame extends JFrame {
         // Die Weideflächen sollen die gesamte Breite und Höhe ausfüllen
         gbc.fill = GridBagConstraints.BOTH;
         // Wir legen Abstände fest
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(8, 8, 8, 8);
         // Die Breite soll sich dynamisch anpassen
         gbc.weightx = 1.0;
         
@@ -854,7 +970,7 @@ public class GUIGame extends JFrame {
         }
 
         // Wir erstellen eine Zeile in der die Weideflächen aller Mitspieler nebeneinander liegen
-        JPanel opponentsRow = new JPanel(new GridLayout(1, opponents.size(), 15, 0));
+        JPanel opponentsRow = new JPanel(new GridLayout(1, opponents.size(), 12, 0));
         // Wir machen den Hintergrund unsichtbar
         opponentsRow.setOpaque(false);
         
@@ -885,12 +1001,11 @@ public class GUIGame extends JFrame {
                 // Wir schalten die Kantenglättung ein
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 // Wir wählen ein leicht transparentes dunkles Holzbraun
-                g2d.setColor(new Color(101, 67, 33, 180));
+                g2d.setColor(new Color(78, 52, 46, 160));
                 // Wir wählen eine fette Linienstärke von 4 Punkten
                 g2d.setStroke(new BasicStroke(4.0f));
                 // Wir zeichnen eine Querlinie als Holzzaun
                 g2d.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
-                // Wir geben das Zeichenwerkzeug frei
                 g2d.dispose();
             }
         };
@@ -956,7 +1071,7 @@ public class GUIGame extends JFrame {
         // Wir erstellen die Beschriftung mit dem Namen des Spielers
         JLabel nameLabel = new JLabel(player.getUsername() + (isActivePlayer ? " (DU)" : ""), JLabel.CENTER);
         // Wenn es der eigene Spieler ist schreiben wir den Namen etwas größer und fetter
-        nameLabel.setFont(new Font("Outfit", Font.BOLD, isActivePlayer ? 22 : 16));
+        nameLabel.setFont(new Font("SansSerif", Font.BOLD, isActivePlayer ? 20 : 15));
         // Wir färben die Schrift weiß
         nameLabel.setForeground(Color.WHITE);
         // Wir fügen einen leeren Abstand nach unten hinzu
@@ -1036,7 +1151,7 @@ public class GUIGame extends JFrame {
                                             showVictoryScreen();
                                         // Wenn das Spiel weitergeht
                                         } else {
-                                            // Wir blenden den Sichtschutz ein damit der nächste Spieler seine Hand nicht sieht
+                                            // Wir blenden den Sichtschutz ein
                                             showPassScreen();
                                         }
                                     }
@@ -1065,336 +1180,332 @@ public class GUIGame extends JFrame {
                     // Wir prüfen ob das Schweinchen leuchtet weil die Maus darüber ist
                     if (isHovered) {
                         // Wir zeichnen einen leicht transparenten weißen Hintergrund
-                        g2d.setColor(new Color(255, 255, 255, 60));
+                        g2d.setColor(new Color(255, 255, 255, 35));
                         g2d.fillRoundRect(0, 0, w, h, 20, 20);
-                        // Wir zeichnen einen glänzenden goldenen Rahmen um die Box
+                        // Wir zeichnen einen glänzenden goldenen Rahmen
                         g2d.setColor(COLOR_GOLD);
-                        // Wir wählen eine fette Linienstärke von 3 Punkten
-                        g2d.setStroke(new BasicStroke(3.0f));
-                        // Wir zeichnen den Umrandungsrahmen
+                        g2d.setStroke(new BasicStroke(2.0f));
                         g2d.drawRoundRect(0, 0, w - 1, h - 1, 20, 20);
                     // Wenn die Maus nicht drüber ist
                     } else {
                         // Wir zeichnen eine dezente dunkle Hintergrundbox
-                        g2d.setColor(new Color(0, 0, 0, 30));
+                        g2d.setColor(new Color(0, 0, 0, 25));
                         g2d.fillRoundRect(0, 0, w, h, 20, 20);
                     }
 
-                    // Wir berechnen die Größe des Schweinchens (für den eigenen Spieler zeichnen wir es größer)
-                    int pigW = isActivePlayer ? 100 : 70;
-                    int pigH = isActivePlayer ? 70 : 50;
+                    // Wir berechnen die Größe des Schweinchens
+                    int pigW = isActivePlayer ? 90 : 60;
+                    int pigH = isActivePlayer ? 60 : 40;
                     // Wir platzieren das Schweinchen zentriert in der Box
                     int pigX = (w - pigW) / 2;
-                    int pigY = h - pigH - (isActivePlayer ? 20 : 10);
+                    int pigY = h - pigH - (isActivePlayer ? 24 : 14);
 
-                    // A) Körper des Schweinchens (wir zeichnen ein rosa Oval)
+                    // 1. Wir zeichnen einen weichen dunklen Schatten unter das Schwein auf die Wiese
+                    g2d.setColor(new Color(0, 0, 0, 35));
+                    g2d.fillOval(pigX - 5, pigY + pigH - 8, pigW + 10, 12);
+
+                    // 2. Körper des Schweinchens (wir zeichnen ein rosa Oval)
                     g2d.setColor(COLOR_PIG_PINK);
                     g2d.fillOval(pigX, pigY, pigW, pigH);
                     // Wir zeichnen eine feine dunkle Umrandung um den Körper
-                    g2d.setColor(new Color(0, 0, 0, 40));
+                    g2d.setColor(new Color(60, 40, 40, 50));
                     g2d.drawOval(pigX, pigY, pigW, pigH);
 
-                    // B) Kopf des Schweinchens (wir zeichnen ein kleineres rosa Oval vorne rechts)
-                    int headW = isActivePlayer ? 50 : 35;
-                    int headH = isActivePlayer ? 50 : 35;
-                    int headX = pigX + pigW - (isActivePlayer ? 35 : 25);
-                    int headY = pigY - (isActivePlayer ? 15 : 10);
+                    // 3. Ringelschwanz zeichnen (spiralförmiger Vektor hinten links)
+                    g2d.setColor(COLOR_PIG_DARK_PINK);
+                    g2d.setStroke(new BasicStroke(2.0f));
+                    Path2D tail = new Path2D.Double();
+                    tail.moveTo(pigX + 5, pigY + pigH / 2);
+                    tail.curveTo(pigX - 10, pigY + pigH / 2 - 10, pigX - 5, pigY + pigH / 2 - 20, pigX - 12, pigY + pigH / 2 - 15);
+                    g2d.draw(tail);
+                    g2d.setStroke(new BasicStroke(1.0f));
+
+                    // 4. Kopf des Schweinchens (wir zeichnen ein kleineres rosa Oval vorne rechts)
+                    int headW = isActivePlayer ? 45 : 30;
+                    int headH = isActivePlayer ? 45 : 30;
+                    int headX = pigX + pigW - (isActivePlayer ? 32 : 22);
+                    int headY = pigY - (isActivePlayer ? 10 : 7);
                     g2d.setColor(COLOR_PIG_PINK);
                     g2d.fillOval(headX, headY, headW, headH);
-                    // Wir zeichnen eine feine dunkle Umrandung um den Kopf
-                    g2d.setColor(new Color(0, 0, 0, 40));
+                    g2d.setColor(new Color(60, 40, 40, 50));
                     g2d.drawOval(headX, headY, headW, headH);
 
-                    // C) Ruessel des Schweinchens (wir zeichnen ein flaches dunkleres Oval)
-                    int snoutW = isActivePlayer ? 20 : 14;
-                    int snoutH = isActivePlayer ? 14 : 10;
-                    int snoutX = headX + headW - (isActivePlayer ? 12 : 8);
-                    int snoutY = headY + (headH - snoutH) / 2;
+                    // 5. Ruessel des Schweinchens (wir zeichnen ein flaches dunkleres Oval)
+                    int snoutW = isActivePlayer ? 18 : 12;
+                    int snoutH = isActivePlayer ? 12 : 8;
+                    int snoutX = headX + headW - (isActivePlayer ? 10 : 7);
+                    int snoutY = headY + (headH - snoutH) / 2 + 2;
                     g2d.setColor(COLOR_PIG_DARK_PINK);
                     g2d.fillOval(snoutX, snoutY, snoutW, snoutH);
-                    // Wir umranden den Rüssel
-                    g2d.setColor(new Color(0, 0, 0, 40));
+                    g2d.setColor(new Color(60, 40, 40, 50));
                     g2d.drawOval(snoutX, snoutY, snoutW, snoutH);
-                    // Wir zeichnen zwei kleine Punkte als Rüssellöcher
+                    // Rüssellöcher (zwei kleine schwarze Punkte)
                     g2d.setColor(Color.DARK_GRAY);
-                    g2d.fillOval(snoutX + (isActivePlayer ? 5 : 3), snoutY + (isActivePlayer ? 4 : 3), isActivePlayer ? 3 : 2, isActivePlayer ? 3 : 2);
-                    g2d.fillOval(snoutX + (isActivePlayer ? 12 : 8), snoutY + (isActivePlayer ? 4 : 3), isActivePlayer ? 3 : 2, isActivePlayer ? 3 : 2);
+                    g2d.fillOval(snoutX + (isActivePlayer ? 4 : 3), snoutY + (isActivePlayer ? 3 : 2), 2, 2);
+                    g2d.fillOval(snoutX + (isActivePlayer ? 10 : 7), snoutY + (isActivePlayer ? 3 : 2), 2, 2);
 
-                    // D) Augen des Schweinchens (wir zeichnen zwei weiße Kreise)
+                    // 6. Niedliche, leicht transparente rosa Bäckchen für den Wow-Effekt
+                    g2d.setColor(new Color(255, 105, 180, 110));
+                    g2d.fillOval(headX + (isActivePlayer ? 8 : 5), headY + (isActivePlayer ? 18 : 12), isActivePlayer ? 10 : 7, isActivePlayer ? 8 : 5);
+
+                    // 7. Augen des Schweinchens (Kulleraugen mit Lichtreflexen)
                     g2d.setColor(Color.WHITE);
                     int eyeSize = isActivePlayer ? 8 : 6;
-                    int eyeX = headX + (isActivePlayer ? 18 : 12);
-                    int eyeY = headY + (isActivePlayer ? 12 : 8);
+                    int eyeX = headX + (isActivePlayer ? 14 : 9);
+                    int eyeY = headY + (isActivePlayer ? 10 : 7);
                     g2d.fillOval(eyeX, eyeY, eyeSize, eyeSize);
                     g2d.fillOval(eyeX + (isActivePlayer ? 12 : 8), eyeY, eyeSize, eyeSize);
                     
-                    // Wir zeichnen zwei kleine schwarze Pupillen
+                    // Pupillen
                     g2d.setColor(Color.BLACK);
-                    g2d.fillOval(eyeX + (isActivePlayer ? 3 : 2), eyeY + (isActivePlayer ? 2 : 1), eyeSize / 2, eyeSize / 2);
-                    g2d.fillOval(eyeX + (isActivePlayer ? 15 : 10), eyeY + (isActivePlayer ? 2 : 1), eyeSize / 2, eyeSize / 2);
+                    g2d.fillOval(eyeX + (isActivePlayer ? 2 : 1), eyeY + (isActivePlayer ? 2 : 1), eyeSize / 2, eyeSize / 2);
+                    g2d.fillOval(eyeX + (isActivePlayer ? 14 : 9), eyeY + (isActivePlayer ? 2 : 1), eyeSize / 2, eyeSize / 2);
 
-                    // E) Linkes Ohr des Schweinchens (wir zeichnen ein kleines Dreieck)
+                    // Kleine weiße Glanzpunkte in den Pupillen (Lichtreflexe für extremen Niedlichkeits-Look)
+                    g2d.setColor(Color.WHITE);
+                    g2d.fillOval(eyeX + (isActivePlayer ? 2 : 1), eyeY + (isActivePlayer ? 2 : 1), 2, 2);
+                    g2d.fillOval(eyeX + (isActivePlayer ? 14 : 9), eyeY + (isActivePlayer ? 2 : 1), 2, 2);
+
+                    // 8. Ohren des Schweinchens (Zwei kleine Dreiecke)
                     Path2D earLeft = new Path2D.Double();
-                    earLeft.moveTo(headX + (isActivePlayer ? 10 : 7), headY + 5);
-                    earLeft.lineTo(headX + (isActivePlayer ? 5 : 3), headY - (isActivePlayer ? 10 : 7));
-                    earLeft.lineTo(headX + (isActivePlayer ? 20 : 14), headY - 2);
+                    earLeft.moveTo(headX + (isActivePlayer ? 10 : 7), headY + 4);
+                    earLeft.lineTo(headX + (isActivePlayer ? 4 : 3), headY - (isActivePlayer ? 8 : 5));
+                    earLeft.lineTo(headX + (isActivePlayer ? 18 : 12), headY - 1);
                     earLeft.closePath();
                     g2d.setColor(COLOR_PIG_PINK);
                     g2d.fill(earLeft);
-                    // Wir zeichnen eine Umrandung um das Ohr
-                    g2d.setColor(new Color(0, 0, 0, 40));
+                    g2d.setColor(new Color(60, 40, 40, 50));
                     g2d.draw(earLeft);
 
-                    // F) Matschflecken zeichnen falls das Schwein eine Drecksau ist
+                    // 9. Matschflecken zeichnen falls das Schwein eine Drecksau ist
                     if (sau.isDirty()) {
-                        // Wir färben den Schlamm braun
                         g2d.setColor(COLOR_MUD);
-                        // Wir zeichnen drei unregelmäßige Schlammflecken auf den Körper
-                        g2d.fillOval(pigX + (isActivePlayer ? 15 : 10), pigY + (isActivePlayer ? 20 : 15), isActivePlayer ? 18 : 12, isActivePlayer ? 14 : 10);
-                        g2d.fillOval(pigX + (isActivePlayer ? 45 : 30), pigY + (isActivePlayer ? 10 : 8), isActivePlayer ? 22 : 16, isActivePlayer ? 12 : 8);
-                        g2d.fillOval(pigX + (isActivePlayer ? 35 : 25), pigY + (isActivePlayer ? 35 : 25), isActivePlayer ? 15 : 10, isActivePlayer ? 12 : 8);
-                        // Wir zeichnen einen Schlammfleck auf den Kopf
-                        g2d.fillOval(headX + (isActivePlayer ? 10 : 8), headY + (isActivePlayer ? 25 : 18), isActivePlayer ? 12 : 8, isActivePlayer ? 8 : 6);
-                    // Wenn das Schwein sauber ist glänzt es schön
+                        // Wir zeichnen mehrere detaillierte Matschflecken auf den Körper
+                        g2d.fillOval(pigX + (isActivePlayer ? 12 : 8), pigY + (isActivePlayer ? 18 : 12), isActivePlayer ? 16 : 10, isActivePlayer ? 12 : 8);
+                        g2d.fillOval(pigX + (isActivePlayer ? 40 : 28), pigY + (isActivePlayer ? 8 : 6), isActivePlayer ? 20 : 14, isActivePlayer ? 10 : 7);
+                        g2d.fillOval(pigX + (isActivePlayer ? 30 : 22), pigY + (isActivePlayer ? 30 : 20), isActivePlayer ? 14 : 9, isActivePlayer ? 10 : 7);
+                        g2d.fillOval(headX + (isActivePlayer ? 8 : 6), headY + (isActivePlayer ? 22 : 15), isActivePlayer ? 10 : 7, isActivePlayer ? 7 : 5);
                     } else {
-                        // Wir färben den Glanz goldgelb
+                        // Sauberes Schweinchen glänzt mit kleinen, eleganten goldenen Funken
                         g2d.setColor(COLOR_GOLD);
-                        // Wir zeichnen drei Sternchen um das Schwein herum
-                        g2d.drawString("+", pigX - 5, pigY + 10);
+                        g2d.setFont(new Font("SansSerif", Font.BOLD, isActivePlayer ? 14 : 10));
+                        g2d.drawString("+", pigX - 6, pigY + 12);
                         g2d.drawString("+", pigX + pigW + 2, pigY + pigH / 2);
                         g2d.drawString("+", headX + headW / 2, headY - 8);
                     }
 
-                    // G) Den Stall zeichnen falls für dieses Schwein ein Stall gebaut wurde
+                    // 10. Gemütlichen Landhaus-Stall zeichnen falls vorhanden
                     if (sau.hasStall()) {
                         // Wir färben das Holz hellbraun
                         g2d.setColor(COLOR_WOOD);
-                        // Wir berechnen die Pfostenbreite
-                        int pWidth = isActivePlayer ? 12 : 8;
-                        // Wir berechnen die linke Pfostenposition
-                        int sX_Left = pigX - (isActivePlayer ? 15 : 10);
-                        // Wir berechnen die rechte Pfostenposition
-                        int sX_Right = pigX + pigW + (isActivePlayer ? 5 : 3);
-                        // Wir berechnen die Höhe des Pfostenstarts
-                        int sY = headY - (isActivePlayer ? 10 : 7);
-                        // Wir berechnen die Pfostenhöhe bis zum Boden
-                        int sHeight = h - sY;
+                        int pWidth = isActivePlayer ? 10 : 7;
+                        int sX_Left = pigX - (isActivePlayer ? 12 : 8);
+                        int sX_Right = pigX + pigW + (isActivePlayer ? 4 : 3);
+                        int sY = headY - (isActivePlayer ? 8 : 5);
+                        int sHeight = h - sY - 15;
                         
-                        // Wir zeichnen den linken Holzpfosten
+                        // Linker Pfosten mit Holzmaserungs-Linien
                         g2d.fillRect(sX_Left, sY, pWidth, sHeight);
-                        // Wir zeichnen den rechten Holzpfosten
+                        // Rechter Pfosten
                         g2d.fillRect(sX_Right, sY, pWidth, sHeight);
                         
-                        // Wir umranden beide Pfosten mit dunklem Holzbraun
+                        // Pfostenumrandung
                         g2d.setColor(COLOR_DARK_WOOD);
                         g2d.drawRect(sX_Left, sY, pWidth, sHeight);
                         g2d.drawRect(sX_Right, sY, pWidth, sHeight);
 
-                        // Wir zeichnen das rote Stalldach
+                        // Rustikales rotes Stalldach drüber
                         g2d.setColor(COLOR_STABLE_RED);
                         Path2D roof = new Path2D.Double();
-                        // Wir beginnen am linken Überhang des Dachs
-                        roof.moveTo(sX_Left - (isActivePlayer ? 10 : 7), sY + (isActivePlayer ? 10 : 7));
-                        // Wir ziehen die Linie hoch zur Dachspitze in der Mitte
-                        roof.lineTo((sX_Left + sX_Right + pWidth) / 2, sY - (isActivePlayer ? 20 : 15));
-                        // Wir ziehen die Linie zum rechten Überhang des Dachs
-                        roof.lineTo(sX_Right + pWidth + (isActivePlayer ? 10 : 7), sY + (isActivePlayer ? 10 : 7));
-                        // Wir schließen die Dachform
+                        roof.moveTo(sX_Left - (isActivePlayer ? 8 : 5), sY + (isActivePlayer ? 8 : 5));
+                        roof.lineTo((sX_Left + sX_Right + pWidth) / 2, sY - (isActivePlayer ? 18 : 12));
+                        roof.lineTo(sX_Right + pWidth + (isActivePlayer ? 8 : 5), sY + (isActivePlayer ? 8 : 5));
                         roof.closePath();
-                        // Wir bemalen das Dach rot
                         g2d.fill(roof);
-                        // Wir zeichnen eine feine dunkle Umrandung um das Dach
-                        g2d.setColor(new Color(0, 0, 0, 60));
+                        g2d.setColor(COLOR_DARK_WOOD);
                         g2d.draw(roof);
 
-                        // Wir zeichnen den Blitzableiter falls einer auf dem Dach montiert ist
+                        // Eine gemütliche warm leuchtende Laterne am Pfosten zeichnen
+                        int latX = sX_Left + (isActivePlayer ? 15 : 10);
+                        int latY = sY + (isActivePlayer ? 12 : 8);
+                        // Laternenband
+                        g2d.setColor(Color.DARK_GRAY);
+                        g2d.drawLine(sX_Left + pWidth, sY + 8, latX, latY);
+                        // Gelber warmer Lichtkreis (Glow-Effekt)
+                        g2d.setColor(new Color(255, 235, 59, 100));
+                        g2d.fillOval(latX - 6, latY - 6, 12, 12);
+                        // Gelber Glaskörper
+                        g2d.setColor(new Color(255, 235, 59));
+                        g2d.fillOval(latX - 3, latY - 3, 6, 6);
+
+                        // Blitzableiter mit coolem blauem Glüheffekt zeichnen
                         if (sau.blitzSchutz()) {
-                            // Wir berechnen die mittlere Dachposition
                             int rX = (sX_Left + sX_Right + pWidth) / 2;
-                            int rY = sY - (isActivePlayer ? 20 : 15);
-                            // Wir legen die Länge der Metallstange fest
-                            int rodH = isActivePlayer ? 25 : 18;
+                            int rY = sY - (isActivePlayer ? 18 : 12);
+                            int rodH = isActivePlayer ? 22 : 15;
                             
-                            // Wir färben die Stange hellgrau
-                            g2d.setColor(Color.LIGHT_GRAY);
-                            // Wir wählen eine feine Linienstärke
-                            g2d.setStroke(new BasicStroke(2.5f));
-                            // Wir zeichnen die Metallstange auf das Dach
+                            // Blaues leuchtendes Energiefeld um den Stab
+                            g2d.setColor(new Color(33, 150, 243, 80));
+                            g2d.setStroke(new BasicStroke(4.0f));
                             g2d.drawLine(rX, rY, rX, rY - rodH);
                             
-                            // Wir färben die Kugel goldgelb
+                            // Metallstange
+                            g2d.setColor(Color.LIGHT_GRAY);
+                            g2d.setStroke(new BasicStroke(2.0f));
+                            g2d.drawLine(rX, rY, rX, rY - rodH);
+                            g2d.setStroke(new BasicStroke(1.0f));
+                            
+                            // Goldene Kugel an der Spitze
                             g2d.setColor(COLOR_GOLD);
-                            // Wir zeichnen die Kugel an die Spitze des Blitzableiters
-                            g2d.fillOval(rX - 4, rY - rodH - 4, 8, 8);
+                            g2d.fillOval(rX - 3, rY - rodH - 3, 6, 6);
                         }
 
-                        // Wir zeichnen die verriegelte Tür falls das Schwein vor dem Bauern geschützt ist
+                        // Bauer-ärgere-dich (Vernageltes Holzkreuz mit Nieten) zeichnen
                         if (sau.bauerSchutz()) {
-                            // Wir färben die Holzbretter braun
-                            g2d.setColor(COLOR_MUD);
-                            // Wir wählen eine sehr dicke Linienstärke für die Bretter
-                            g2d.setStroke(new BasicStroke(isActivePlayer ? 8.0f : 5.0f));
+                            g2d.setColor(new Color(141, 110, 99));
+                            g2d.setStroke(new BasicStroke(isActivePlayer ? 7.0f : 4.0f));
                             
-                            // Wir vernageln die Stalltür mit einem fetten Holzkreuz
-                            g2d.drawLine(sX_Left, h - 10, sX_Right + pWidth, sY + 15);
-                            g2d.drawLine(sX_Left, sY + 15, sX_Right + pWidth, h - 10);
+                            // Zwei fette vernagelte Holzbohlen als X
+                            g2d.drawLine(sX_Left, h - 22, sX_Right + pWidth, sY + 12);
+                            g2d.drawLine(sX_Left, sY + 12, sX_Right + pWidth, h - 22);
                             
-                            // Wir umranden die Bretter schwarz für ein plastisches Aussehen
-                            g2d.setColor(Color.BLACK);
+                            // Dünne schwarze Ränder
+                            g2d.setColor(COLOR_DARK_WOOD);
                             g2d.setStroke(new BasicStroke(1.0f));
-                            g2d.draw(new Line2D.Double(sX_Left, h - 10, sX_Right + pWidth, sY + 15));
-                            g2d.draw(new Line2D.Double(sX_Left, sY + 15, sX_Right + pWidth, h - 10));
+                            g2d.draw(new Line2D.Double(sX_Left, h - 22, sX_Right + pWidth, sY + 12));
+                            g2d.draw(new Line2D.Double(sX_Left, sY + 12, sX_Right + pWidth, h - 22));
+
+                            // Kleine Nieten/Nägel an den Enden der Bretter zeichnen (silberne Punkte)
+                            g2d.setColor(Color.LIGHT_GRAY);
+                            g2d.fillOval(sX_Left + 2, h - 24, 3, 3);
+                            g2d.fillOval(sX_Right + pWidth - 5, h - 24, 3, 3);
+                            g2d.fillOval(sX_Left + 2, sY + 12, 3, 3);
+                            g2d.fillOval(sX_Right + pWidth - 5, sY + 12, 3, 3);
                         }
                     }
 
-                    // H) Wir zeichnen die Nummer des Schweinchens und seinen Zustand ganz unten hin
+                    // 11. Status-Beschriftung auf dem Wiesenboden
                     g2d.setColor(Color.WHITE);
-                    // Wenn es der eigene Spieler ist schreiben wir die Beschriftung etwas größer
-                    g2d.setFont(new Font("Inter", Font.BOLD, isActivePlayer ? 12 : 9));
-                    // Wir erstellen den Zustandstext
+                    g2d.setFont(new Font("SansSerif", Font.BOLD, isActivePlayer ? 11 : 9));
                     String statusText = (index + 1) + ". " + (sau.isDirty() ? "Drecksau" : "Sauber");
-                    // Wir holen uns die Textbreite um den Text genau mittig zu platzieren
                     FontMetrics fm = g2d.getFontMetrics();
-                    // Wir zeichnen den Text auf den Wiesenboden
-                    g2d.drawString(statusText, (w - fm.stringWidth(statusText)) / 2, h - 5);
+                    g2d.drawString(statusText, (w - fm.stringWidth(statusText)) / 2, h - 4);
 
-                    // Wir geben das Zeichenwerkzeug frei
                     g2d.dispose();
                 }
             };
-            // Wir machen die Schweinebox im Hintergrund unsichtbar
             pigCanvas.setOpaque(false);
-            // Wir fügen das Schweinchen zur Wiesenreihe hinzu
             pigsRow.add(pigCanvas);
         }
 
-        // Wir fügen die Schweine-Reihe in die Mitte der Weide ein
         panel.add(pigsRow, BorderLayout.CENTER);
-        // Wir geben das fertige Weidepanel zurück
         return panel;
     }
 
-    // Diese Funktion baut eine einzelne Handkarte zum Anklicken auf
+    // Diese Funktion baut das Panel für eine einzelne Handkarte auf
     private JPanel createCardPanel(Card card, int cardIndex) {
-        // Wir erstellen die Handkarte und malen sie wunderschön aus
         JPanel cardPanel = new JPanel() {
-            // Hier speichern wir ob die Maus über der Handkarte schwebt
             private boolean isHovered = false;
 
             @Override
             protected void paintComponent(Graphics g) {
-                // Wir rufen die Standard-Zeichenfunktion auf
                 super.paintComponent(g);
-                // Wir holen uns das zweidimensionale Zeichenwerkzeug
                 Graphics2D g2d = (Graphics2D) g.create();
-                // Wir schalten die Kantenglättung ein
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-                // Wir lesen die Breite und Höhe der Karte aus
                 int w = getWidth();
                 int h = getHeight();
 
-                // Wir legen leere Farbvariablen für den Kartentyp an
+                // Basisgradient je nach Kartentyp bestimmen (Harmonische Premium-Farben)
                 GradientPaint gp;
                 Color topColor;
                 Color bottomColor;
 
-                // Wir wählen ein edles Farbdesign je nach Name der Spielkarte
                 switch (card.getName()) {
                     case "Matsch":
-                        // Matsch bekommt ein erdiges Schlammbraun
-                        topColor = new Color(141, 110, 99);
-                        bottomColor = new Color(93, 64, 55);
+                        topColor = new Color(139, 105, 80);
+                        bottomColor = new Color(78, 52, 46);
                         break;
                     case "Regen":
-                        // Regen bekommt ein wolkenartiges Regenblau
-                        topColor = new Color(74, 144, 226);
-                        bottomColor = new Color(42, 92, 160);
+                        topColor = new Color(79, 195, 247);
+                        bottomColor = new Color(21, 101, 192);
                         break;
                     case "Stall":
-                        // Stall bekommt ein warmes Holzgelb
-                        topColor = new Color(212, 172, 13);
-                        bottomColor = new Color(154, 125, 10);
+                        topColor = new Color(255, 202, 40);
+                        bottomColor = new Color(245, 127, 23);
                         break;
                     case "Blitz":
-                        // Blitz bekommt ein mystisches Gewitter-Lila
-                        topColor = new Color(155, 89, 182);
-                        bottomColor = new Color(108, 52, 131);
+                        topColor = new Color(186, 104, 200);
+                        bottomColor = new Color(74, 20, 140);
                         break;
                     case "Blitzableiter":
-                        // Blitzableiter bekommt ein glänzendes Metallsilber
-                        topColor = new Color(149, 165, 166);
-                        bottomColor = new Color(90, 90, 90);
+                        topColor = new Color(176, 190, 197);
+                        bottomColor = new Color(55, 71, 79);
                         break;
                     case "Bauer schrubbt":
-                        // Bauer-schrubbt bekommt ein fleißiges Reinigungs-Orange
-                        topColor = new Color(230, 126, 34);
-                        bottomColor = new Color(186, 94, 20);
+                        topColor = new Color(255, 167, 38);
+                        bottomColor = new Color(230, 81, 0);
                         break;
                     case "Bauer aerger dich":
-                        // Bauer-ärgere-dich bekommt ein wütendes Warn-Rot
-                        topColor = new Color(231, 76, 60);
-                        bottomColor = new Color(192, 57, 43);
+                        topColor = new Color(239, 83, 80);
+                        bottomColor = new Color(183, 28, 28);
                         break;
                     case "Schlammvulkan":
-                        // Vulkan bekommt ein glühendes Magma-Orange
-                        topColor = new Color(243, 156, 18);
-                        bottomColor = new Color(211, 47, 47);
+                        topColor = new Color(255, 112, 67);
+                        bottomColor = new Color(191, 54, 12);
                         break;
                     default:
-                        // Alle unbekannten Karten bekommen ein einfaches Grau
                         topColor = Color.LIGHT_GRAY;
                         bottomColor = Color.GRAY;
                 }
 
-                // Wir erstellen einen eleganten vertikalen Farbverlauf auf der Karte
+                // Wir zeichnen einen sanften Schlagschatten unter die Karte für ein plastisches Aussehen
+                g2d.setColor(new Color(0, 0, 0, 45));
+                g2d.fillRoundRect(3, 3, w - 3, h - 3, 18, 18);
+
+                // Elegant abgerundete Karte mit dem Farbverlauf bemalen
                 gp = new GradientPaint(0, 0, topColor, 0, h, bottomColor);
-                // Wir laden den Verlauf
                 g2d.setPaint(gp);
-                // Wir bemalen die Karte mit abgerundeten Ecken
-                g2d.fillRoundRect(0, 0, w, h, 18, 18);
+                g2d.fillRoundRect(0, 0, w - 3, h - 3, 18, 18);
 
-                // Wenn diese Handkarte gerade vom Spieler ausgewählt wurde
+                // Rahmen zeichnen
                 if (selectedHandCardIndex == cardIndex) {
-                    // Wir färben den Rahmen strahlend goldgelb
+                    // Strahlend goldener dicker Auswahlrahmen
                     g2d.setColor(COLOR_GOLD);
-                    // Wir wählen eine dicke Linienstärke von 4 Punkten
-                    g2d.setStroke(new BasicStroke(4.0f));
-                    // Wir zeichnen den leuchtenden Rahmen auf die Karte
-                    g2d.drawRoundRect(2, 2, w - 4, h - 4, 18, 18);
+                    g2d.setStroke(new BasicStroke(3.0f));
+                    g2d.drawRoundRect(1, 1, w - 5, h - 5, 18, 18);
                     
-                    // Wir zeichnen ein warmes goldenes Glühen über die Karte
-                    g2d.setColor(new Color(241, 196, 15, 40));
-                    g2d.fillRoundRect(2, 2, w - 4, h - 4, 18, 18);
-                // Wenn die Maus nur über der Karte schwebt
+                    // Goldenes Glühen im Hintergrund
+                    g2d.setColor(new Color(255, 215, 0, 30));
+                    g2d.fillRoundRect(1, 1, w - 5, h - 5, 18, 18);
                 } else if (isHovered) {
-                    // Wir färben den Rahmen weiß
+                    // Feiner weißer Rahmen bei Schwebung
                     g2d.setColor(Color.WHITE);
-                    // Wir wählen eine Linienstärke von 2 Punkten
                     g2d.setStroke(new BasicStroke(2.0f));
-                    // Wir zeichnen den schwebenden Rahmen auf die Karte
-                    g2d.drawRoundRect(1, 1, w - 2, h - 2, 18, 18);
-                // Wenn die Karte unberührt auf der Hand liegt
+                    g2d.drawRoundRect(0, 0, w - 4, h - 4, 18, 18);
                 } else {
-                    // Wir zeichnen einen dezenten dunklen Schattenrand um die Karte
-                    g2d.setColor(new Color(0, 0, 0, 50));
-                    g2d.drawRoundRect(0, 0, w - 1, h - 1, 18, 18);
+                    // Dezent dunkler feiner Rahmen
+                    g2d.setColor(new Color(0, 0, 0, 40));
+                    g2d.drawRoundRect(0, 0, w - 4, h - 4, 18, 18);
                 }
+                g2d.setStroke(new BasicStroke(1.0f));
 
-                // A) Wir schreiben den Namen der Karte oben hin
+                // Name der Spielkarte
                 g2d.setColor(Color.WHITE);
-                // Wir wählen eine fette moderne Schriftart
-                g2d.setFont(new Font("Outfit", Font.BOLD, 18));
-                // Wir holen uns die Textbreite zum Zentrieren des Namens
+                g2d.setFont(new Font("SansSerif", Font.BOLD, 16));
                 FontMetrics fmName = g2d.getFontMetrics();
-                // Wir schreiben den Namen genau mittig auf die Karte
-                g2d.drawString(card.getName(), (w - fmName.stringWidth(card.getName())) / 2, 32);
+                g2d.drawString(card.getName(), (w - 3 - fmName.stringWidth(card.getName())) / 2, 28);
 
-                // B) Wir zeichnen ein kurzes Wortsymbol anstelle eines Emojis in die Mitte
-                g2d.setFont(new Font("Inter", Font.BOLD, 28));
-                // Wir legen ein leeres Textfeld an
+                // Ein hübscher kreisförmiger Hintergrund für das Symbol in der Mitte der Karte
+                g2d.setColor(new Color(255, 255, 255, 30));
+                g2d.fillOval(w / 2 - 24, 45, 45, 45);
+                g2d.setColor(new Color(255, 255, 255, 50));
+                g2d.drawOval(w / 2 - 24, 45, 45, 45);
+
+                // Ein kurzes feines Wortsymbol zeichnen
+                g2d.setFont(new Font("SansSerif", Font.BOLD, 10));
+                g2d.setColor(Color.WHITE);
                 String symbol = "";
-                // Wir wählen ein passendes Textsymbol je nach Kartentyp aus
                 switch (card.getName()) {
                     case "Matsch": symbol = "MATSCH"; break;
                     case "Regen": symbol = "REGEN"; break;
@@ -1405,138 +1516,96 @@ public class GUIGame extends JFrame {
                     case "Bauer aerger dich": symbol = "RIEGEL"; break;
                     case "Schlammvulkan": symbol = "VULKAN"; break;
                 }
-                // Wir holen uns die Textbreite des Symbols
                 FontMetrics fmSymbol = g2d.getFontMetrics();
-                // Wir schreiben das Symbol genau zentriert in die Mitte der Karte
-                g2d.drawString(symbol, (w - fmSymbol.stringWidth(symbol)) / 2, 75);
+                g2d.drawString(symbol, (w - 3 - fmSymbol.stringWidth(symbol)) / 2, 71);
 
-                // C) Wir schreiben die verständliche Beschreibung der Karte unten hin
-                g2d.setFont(new Font("Inter", Font.PLAIN, 10));
-                // Wir wählen ein gut lesbares Hellgrau
-                g2d.setColor(new Color(240, 240, 240));
+                // Beschreibungstext (laienfreundlich und sauber formatiert)
+                g2d.setFont(new Font("SansSerif", Font.PLAIN, 10));
+                g2d.setColor(new Color(245, 245, 245));
                 
-                // Wir holen uns den Beschreibungstext der Karte
                 String desc = card.getBeschreibung();
-                // Wir zerlegen den Text an allen Leerzeichen in einzelne Wörter
                 String[] words = desc.split(" ");
-                // Wir legen einen Speicher für die aktuelle Textzeile an
                 StringBuilder line = new StringBuilder();
-                // Wir beginnen mit dem Schreiben bei einer Höhe von 110 Bildpunkten
-                int yPos = 110;
+                int yPos = 112;
                 
-                // Wir gehen jedes einzelne Wort der Reihe nach durch
                 for (String word : words) {
-                    // Wir prüfen ob das Wort noch in die aktuelle Zeile passt
-                    if (g2d.getFontMetrics().stringWidth(line.toString() + " " + word) < w - 20) {
-                        // Wenn ja fügen wir das Wort zur aktuellen Zeile hinzu
+                    if (g2d.getFontMetrics().stringWidth(line.toString() + " " + word) < w - 24) {
                         line.append(" ").append(word);
-                    // Wenn die Zeile voll ist
                     } else {
-                        // Wir schreiben die fertige Zeile auf die Karte
-                        g2d.drawString(line.toString().trim(), 12, yPos);
-                        // Wir gehen 14 Bildpunkte nach unten in die nächste Zeile
+                        g2d.drawString(line.toString().trim(), 14, yPos);
                         yPos += 14;
-                        // Wir beginnen eine neue Zeile mit dem aktuellen Wort
                         line = new StringBuilder(word);
                     }
                 }
-                // Wenn am Ende noch ein Resttext übrig ist
                 if (line.length() > 0) {
-                    // Wir schreiben den letzten Resttext auf die Karte
-                    g2d.drawString(line.toString().trim(), 12, yPos);
+                    g2d.drawString(line.toString().trim(), 14, yPos);
                 }
 
-                // Wir geben das Zeichenwerkzeug wieder frei
                 g2d.dispose();
             }
         };
 
-        // Wir legen die Standardgröße der Handkarte fest
-        cardPanel.setPreferredSize(new Dimension(160, 180));
-        // Wir machen den Hintergrund der Handkarte unsichtbar
+        cardPanel.setPreferredSize(new Dimension(160, 185));
         cardPanel.setOpaque(false);
         
-        // Wir reagieren auf Maus-Interaktionen mit dieser Handkarte
+        // Maus-Aktionen für die Handkarte
         cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                // Der Mauszeiger verwandelt sich beim Drüberfahren in eine zeigende Hand
                 cardPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                // Wir verschieben die Karte optisch um zehn Bildpunkte nach oben um ein Schweben anzuzeigen
-                cardPanel.setBounds(cardPanel.getX(), cardPanel.getY() - 10, cardPanel.getWidth(), cardPanel.getHeight());
-                // Wir zeichnen die Karte neu
+                // Karte schwebt sanft nach oben
+                cardPanel.setBounds(cardPanel.getX(), cardPanel.getY() - 8, cardPanel.getWidth(), cardPanel.getHeight());
                 repaint();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                // Der Mauszeiger wird wieder normal wenn die Maus die Karte verlässt
                 cardPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                // Wir zeichnen die Karte neu
                 repaint();
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Wenn man eine bereits ausgewählte Handkarte noch einmal anklickt
                 if (selectedHandCardIndex == cardIndex) {
-                    // Wir heben die Kartenauswahl komplett auf
                     selectedHandCard = null;
                     selectedHandCardIndex = -1;
-                // Wenn man eine andere Handkarte anklickt
                 } else {
-                    // Wir wählen diese Spielkarte aus
                     selectedHandCard = card;
-                    // Wir speichern die Nummer der Karte ab
                     selectedHandCardIndex = cardIndex;
                 }
-                
-                // Wir bringen die gesamte Spielfläche auf den allerneuesten Stand
                 updateUIState();
             }
         });
 
-        // Wir geben das fertige Kartenpanel zurück
         return cardPanel;
     }
 
     // Diese Funktion steuert das freiwillige Abwerfen oder das globale Ausspielen von Ereignissen
     private void handleDiscardOrGlobalPlay() {
-        // Wenn keine Handkarte ausgewählt wurde oder das Spiel nicht läuft brechen wir ab
         if (selectedHandCard == null || game == null) return;
 
-        // Wir holen uns die ausgewählte Spielkarte
         Card card = selectedHandCard;
-        // Wir holen uns den Namen der Karte
         String name = card.getName();
 
-        // 1. Fall: Es handelt sich um ein globales Ereignis (Regen oder Schlammvulkan)
+        // 1. Fall: Globales Ereignis spielen
         if (name.equals("Regen") || name.equals("Schlammvulkan")) {
             try {
-                // Wir spielen die Karte ohne ein spezielles Zielschwein (-1, null) aus
                 game.spieleZug(card, -1, null);
                 
-                // Wir setzen die Kartenauswahl komplett zurück
                 selectedHandCard = null;
                 selectedHandCardIndex = -1;
 
-                // Wenn das Spiel nach diesem Ereignis beendet ist
                 if (game.isGameOver()) {
-                    // Wir zeigen den Siegesbildschirm
                     showVictoryScreen();
-                // Wenn das Spiel weitergeht
                 } else {
-                    // Wir blenden den Sichtschutz für den Spielerwechsel ein
                     showPassScreen();
                 }
             } catch (Exception ex) {
-                // Bei einem Fehler zeigen wir ein kurzes Fehlerfenster an
                 JOptionPane.showMessageDialog(this, "Fehler: " + ex.getMessage(), "Ereignis-Fehler", JOptionPane.ERROR_MESSAGE);
             }
         } 
-        // 2. Fall: Der Spieler wirft eine normale Karte freiwillig ungenutzt ab
+        // 2. Fall: Karte abwerfen
         else {
-            // Wir fragen den Spieler über ein Ja-Nein-Fenster ob er die Karte wirklich abwerfen will
             int reply = JOptionPane.showConfirmDialog(
                 this, 
                 "Moechtest du die Karte " + name + " wirklich ungenutzt auf den Ablagestapel werfen?", 
@@ -1544,27 +1613,21 @@ public class GUIGame extends JFrame {
                 JOptionPane.YES_NO_OPTION
             );
             
-            // Wenn der Spieler mit Ja bestätigt
             if (reply == JOptionPane.YES_OPTION) {
-                // Wir werfen die Handkarte freiwillig ab und ziehen eine neue Karte nach
                 game.karteFreiwilligAbwerfen(card);
                 
-                // Wir setzen die Auswahl komplett zurück
                 selectedHandCard = null;
                 selectedHandCardIndex = -1;
                 
-                // Wir blenden den Sichtschutz für den Spielerwechsel ein
                 showPassScreen();
             }
         }
     }
 
-    // Diese Funktion wickelt das Notfall-Abwerfen ab wenn ein Spieler blockiert ist
+    // Diese Funktion wickelt das Abwerfen der blockierten Hand ab
     private void handleDiscardEntireHand() {
-        // Wenn das Spiel nicht läuft brechen wir ab
         if (game == null) return;
         
-        // Wir fragen den Spieler ob er wirklich keine gültigen Spielzüge machen kann
         int reply = JOptionPane.showConfirmDialog(
             this,
             "Bestaetigst du, dass du keinen gueltigen Spielzug machen kannst?\n(Deine Karten werden den anderen gezeigt, abgeworfen und du ziehst 3 neue Karten).",
@@ -1572,51 +1635,48 @@ public class GUIGame extends JFrame {
             JOptionPane.YES_NO_OPTION
         );
 
-        // Wenn der Spieler mit Ja bestätigt
         if (reply == JOptionPane.YES_OPTION) {
-            // Die Spiel-Engine wirft alle Karten ab und teilt drei neue Karten aus
             game.handAbwerfenUndNeuZiehen();
             
-            // Wir setzen die Kartenauswahl komplett zurück
             selectedHandCard = null;
             selectedHandCardIndex = -1;
             
-            // Wir zeigen den Sichtschutz an
             showPassScreen();
         }
     }
 
-    // Diese Funktion schaltet auf den Sichtschutz-Bildschirm um
+    // Diese Funktion zeigt den Sichtschutz für den Spielerwechsel an
     private void showPassScreen() {
-        // Wir durchsuchen alle Elemente in der Sichtschutz-Ansicht
         Component[] comps = passPanel.getComponents();
-        // Wir gehen alle Elemente durch
         for (Component c : comps) {
-            // Wenn wir den Hinweistext finden
-            if (c instanceof JLabel && ((JLabel) c).getText().startsWith("Bereit machen")) {
-                // Wir aktualisieren den Text und tragen den Namen des nächsten Spielers ein
-                ((JLabel) c).setText("Bereit machen, " + game.getActivePlayer().getUsername() + "!");
+            // Wir suchen im Glaspanel nach dem Hinweistext
+            if (c instanceof JPanel) {
+                Component[] innerComps = ((JPanel) c).getComponents();
+                for (Component ic : innerComps) {
+                    if (ic instanceof JLabel && ((JLabel) ic).getText().startsWith("Bereit machen")) {
+                        ((JLabel) ic).setText("Bereit machen, " + game.getActivePlayer().getUsername() + "!");
+                    }
+                }
             }
         }
         
-        // Wir wechseln die Ansicht auf den Sichtschutz
         cardLayout.show(mainContainer, "PASS");
     }
 
-    // Diese Funktion schaltet auf den Siegesbildschirm um wenn das Spiel vorbei ist
+    // Diese Funktion schaltet auf den Siegesbildschirm um
     private void showVictoryScreen() {
-        // Wir durchsuchen alle Elemente in der Sieges-Ansicht
         Component[] comps = victoryPanel.getComponents();
-        // Wir gehen alle Elemente nacheinander durch
         for (Component c : comps) {
-            // Wenn wir den Sieges-Text finden
-            if (c instanceof JLabel && ((JLabel) c).getText().contains("gewonnen")) {
-                // Wir tragen den Namen des glücklichen Gewinners ein
-                ((JLabel) c).setText("Sieg! " + game.getWinner().getUsername() + " HAT GEWONNEN!");
+            if (c instanceof JPanel) {
+                Component[] innerComps = ((JPanel) c).getComponents();
+                for (Component ic : innerComps) {
+                    if (ic instanceof JLabel && ((JLabel) ic).getText().contains("gewonnen")) {
+                        ((JLabel) ic).setText("Sieg! " + game.getWinner().getUsername() + " HAT GEWONNEN!");
+                    }
+                }
             }
         }
         
-        // Wir wechseln die Ansicht auf den Siegesbildschirm
         cardLayout.show(mainContainer, "VICTORY");
     }
 }
