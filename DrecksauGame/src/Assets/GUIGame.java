@@ -965,7 +965,7 @@ public class GUIGame extends JFrame {
         panel.add(nameLabel, BorderLayout.NORTH);
 
         // Wir erstellen eine Reihe für die Schweine des Spielers
-        JPanel pigsRow = new JPanel(new GridLayout(1, player.getSchweine().size(), isActivePlayer ? 15 : 8));
+        JPanel pigsRow = new JPanel(new GridLayout(1, player.getSchweine().size(), isActivePlayer ? 15 : 8, 0));
         // Wir machen die Reihe im Hintergrund unsichtbar
         pigsRow.setOpaque(false);
 
