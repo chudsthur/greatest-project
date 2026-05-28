@@ -584,7 +584,7 @@ public class GUIGame extends JFrame {
         cardGbc.gridx = 0;
 
         // Wir erstellen den großen Sieges-Titel
-        JLabel winTitle = new JLabel("HERZLICHEN GLUECKWUNSCH!", JLabel.CENTER);
+        JLabel winTitle = new JLabel("HERZLICHEN GLÜCKWUNSCH!", JLabel.CENTER);
         // Wir setzen eine sehr große und fette Schrift fest
         winTitle.setFont(new Font("SansSerif", Font.BOLD, 42));
         // Wir färben die Schrift weiß
@@ -603,7 +603,7 @@ public class GUIGame extends JFrame {
         glassCard.add(winnerText, cardGbc);
 
         // Wir erstellen eine kurze Erklärung
-        JLabel descText = new JLabel("Alle Schweine sind glueckliche Drecksaeue geworden!", JLabel.CENTER);
+        JLabel descText = new JLabel("Alle Schweine sind glückliche Drecksäue geworden!", JLabel.CENTER);
         // Wir setzen die Schriftart fest
         descText.setFont(new Font("SansSerif", Font.PLAIN, 18));
         // Wir färben den Text weiß
@@ -1671,7 +1671,7 @@ public class GUIGame extends JFrame {
                 Component[] innerComps = ((JPanel) c).getComponents();
                 for (Component ic : innerComps) {
                     if (ic instanceof JLabel && ((JLabel) ic).getText().contains("gewonnen")) {
-                        ((JLabel) ic).setText("Sieg! " + game.getWinner().getUsername() + " HAT GEWONNEN!");
+                        ((JLabel) ic).setText("Sieg! " + game.getWinner().getUsername() + " hat gewonnen!");
                     }
                 }
             }
