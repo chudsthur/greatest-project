@@ -212,7 +212,7 @@ public class GUIGame extends JFrame {
         cardGbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Wir erstellen den beschreibenden Text für die Auswahl
-        JLabel countLabel = new JLabel("Waehle Spieleranzahl: ");
+        JLabel countLabel = new JLabel("Wähle Spieleranzahl: ");
         // Wir setzen eine moderne Schrift fest
         countLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
         // Wir färben den Text weiß
